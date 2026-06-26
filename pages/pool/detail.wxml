@@ -1,0 +1,11 @@
+<view class="container" wx:if="{{vehicle}}">
+  <view class="card">
+    <view class="info-row"><text class="info-label">VIN</text><text class="info-value">{{vehicle.vin}}</text></view>
+    <view class="info-row"><text class="info-label">车牌</text><text class="info-value">{{vehicle.license_plate || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">客户</text><text class="info-value">{{vehicle.customer_name || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">车型</text><text class="info-value">{{vehicle.model || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">车辆类型</text><text class="info-value">{{vehicle.vehicle_type || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{vehicle.sales_dealer || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">交付日期</text><text class="info-value">{{vehicle.delivery_date || '-'}}</text></view>
+  </view>
+</view>

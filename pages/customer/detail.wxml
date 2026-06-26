@@ -1,0 +1,38 @@
+<view class="container" wx:if="{{customer}}">
+  <view class="tabs">
+    <view class="tab {{activeTab === 'info' ? 'active' : ''}}" bindtap="switchTab" data-tab="info">信息</view>
+    <view class="tab {{activeTab === 'vehicles' ? 'active' : ''}}" bindtap="switchTab" data-tab="vehicles">车辆({{vehicles.length}})</view>
+    <view class="tab {{activeTab === 'activities' ? 'active' : ''}}" bindtap="switchTab" data-tab="activities">活动({{activities.length}})</view>
+  </view>
+
+  <view class="card" wx:if="{{activeTab === 'info'}}">
+    <view class="info-row"><text class="info-label">客户名称</text><text class="info-value">{{customer.customer_name}}</text></view>
+    <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{customer.sales_dealers_summary || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{customer.service_dealers_summary || '-'}}</text></view>
+  </view>
+
+  <view wx:if="{{activeTab === 'vehicles'}}">
+    <view class="list-item" wx:for="{{vehicles}}" wx:key="vin" bindtap="goVehicle" data-vin="{{item.vin}}">
+      <view class="item-left">
+        <text class="vin-text">{{item.vin}}</text>
+        <text class="sub-text">{{item.model || '-'}} | 归属: {{item.service_dealer}}</text>
+      </view>
+      <text class="arrow">></text>
+    </view>
+    <view class="empty" wx:if="{{vehicles.length === 0}}">暂无关联车辆</view>
+  </view>
+
+  <view wx:if="{{activeTab === 'activities'}}">
+    <view class="card" wx:for="{{activities}}" wx:key="id" bindtap="goActivityDetail" data-id="{{item.id}}">
+      <view class="activity-header">
+        <text class="tag tag-{{item.status === 'completed' ? 'done' : 'draft'}}">{{item.status === 'completed' ? '已完成' : '草稿'}}</text>
+        <text class="activity-method">{{item.visit_method}}</text>
+      </view>
+      <text class="activity-content">{{item.content || '无内容'}}</text>
+      <text class="activity-time">{{item.visit_time || item.created_at}}</text>
+    </view>
+    <view class="empty" wx:if="{{activities.length === 0}}">暂无销售活动</view>
+  </view>
+
+  <view class="fab" wx:if="{{canAddActivity}}" bindtap="goAddActivity">+ 新增活动</view>
+</view>

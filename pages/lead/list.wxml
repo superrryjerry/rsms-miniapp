@@ -1,0 +1,21 @@
+<picker mode="selector" range="{{leadTypes}}" range-key="label" value="{{typeIndex}}" bindchange="onTypeChange">
+  <view class="filter-bar">类型筛选: {{leadTypes[typeIndex].label}} ▼</view>
+</picker>
+<view class="list-container">
+  <view class="card lead-card" wx:for="{{list}}" wx:key="id">
+    <view class="lead-header">
+      <text class="tag tag-{{item.status === 'pending' ? 'warning' : item.status === 'handled' ? 'done' : 'pending'}}">{{item.status === 'pending' ? '待处理' : item.status === 'handled' ? '已处理' : '已读'}}</text>
+      <text class="lead-type">{{item.lead_type}}</text>
+    </view>
+    <view class="info-row"><text class="info-label">VIN</text><text class="info-value" bindtap="goVehicle" data-vin="{{item.vin}}">{{item.vin}}</text></view>
+    <view class="info-row"><text class="info-label">触发值</text><text class="info-value">{{item.trigger_value || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">阈值</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">时间</text><text class="info-value">{{item.created_at}}</text></view>
+    <view class="lead-actions" wx:if="{{item.status === 'pending'}}">
+      <button size="mini" bindtap="markRead" data-id="{{item.id}}">标记已读</button>
+      <button size="mini" type="primary" bindtap="markHandled" data-id="{{item.id}}">标记已处理</button>
+    </view>
+  </view>
+  <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无线索</view>
+  <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
+</view>

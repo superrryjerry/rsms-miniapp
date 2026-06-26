@@ -1,0 +1,11 @@
+.profile-card { display: flex; align-items: center; padding: 40rpx 32rpx; }
+.avatar { width: 100rpx; height: 100rpx; border-radius: 50%; background: #1890ff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 40rpx; margin-right: 24rpx; }
+.profile-info { flex: 1; }
+.name { display: block; font-size: 34rpx; font-weight: bold; }
+.phone { display: block; font-size: 26rpx; color: #666; margin-top: 8rpx; }
+.dealer { display: block; font-size: 24rpx; color: #999; margin-top: 4rpx; }
+.menu-list { background: #fff; border-radius: 12rpx; overflow: hidden; }
+.menu-item { display: flex; justify-content: space-between; align-items: center; padding: 30rpx 32rpx; border-bottom: 1rpx solid #f0f0f0; font-size: 30rpx; }
+.menu-item:last-child { border-bottom: none; }
+.arrow { color: #ccc; }
+.logout-text { color: #f5222d; }

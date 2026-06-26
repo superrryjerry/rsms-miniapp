@@ -1,0 +1,83 @@
+<view class="container" wx:if="{{vehicle}}">
+  <!-- Tab切换 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'info' ? 'active' : ''}}" bindtap="switchTab" data-tab="info">基础信息</view>
+    <view class="tab {{activeTab === 'contract' ? 'active' : ''}}" bindtap="switchTab" data-tab="contract">合同</view>
+    <view class="tab {{activeTab === 'workorder' ? 'active' : ''}}" bindtap="switchTab" data-tab="workorder">工单</view>
+  </view>
+
+  <!-- 基础信息 -->
+  <view class="card" wx:if="{{activeTab === 'info'}}">
+    <view class="info-row"><text class="info-label">VIN</text><text class="info-value">{{vehicle.vin}}</text></view>
+    <view class="info-row"><text class="info-label">车牌</text><text class="info-value">{{vehicle.license_plate || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">客户</text><text class="info-value">{{vehicle.customer_name || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">车型</text><text class="info-value">{{vehicle.model || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">车辆类型</text><text class="info-value">{{vehicle.vehicle_type || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{vehicle.sales_dealer || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{vehicle.service_dealer}}</text></view>
+    <view class="info-row"><text class="info-label">交付日期</text><text class="info-value">{{vehicle.delivery_date || '-'}}</text></view>
+  </view>
+
+  <!-- 合同列表 -->
+  <view wx:if="{{activeTab === 'contract'}}">
+    <view class="card" wx:for="{{contracts}}" wx:key="id">
+      <view class="contract-status"><text class="tag tag-{{item.status === 'expired' ? 'expired' : item.status === 'warning' ? 'warning' : 'done'}}">{{item.status}}</text></view>
+      <view class="info-row"><text class="info-label">结束日期</text><text class="info-value">{{item.contract_end_date || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">设置里程</text><text class="info-value">{{item.contract_set_mileage}} km</text></view>
+      <view class="info-row"><text class="info-label">已用里程</text><text class="info-value">{{item.mileage_used}} km</text></view>
+      <view class="info-row"><text class="info-label">合同次数</text><text class="info-value">{{item.contract_total_count}} (已完成 {{item.contract_done_count}})</text></view>
+    </view>
+    <view class="empty" wx:if="{{contracts.length === 0}}">暂无合同</view>
+  </view>
+
+  <!-- 工单列表 -->
+  <view wx:if="{{activeTab === 'workorder'}}">
+    <view class="card" wx:for="{{workOrders}}" wx:key="id">
+      <view class="info-row"><text class="info-label">日期</text><text class="info-value">{{item.order_date || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">类型</text><text class="info-value">{{item.order_type || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">内容</text><text class="info-value">{{item.order_content || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">金额</text><text class="info-value">{{item.amount || '-'}}</text></view>
+    </view>
+    <view class="empty" wx:if="{{workOrders.length === 0}}">暂无工单</view>
+  </view>
+
+  <!-- 操作按钮（读写模式） -->
+  <view class="action-bar" wx:if="{{permission === 'editable'}}">
+    <button class="btn btn-danger" bindtap="onDrop">丢公海池</button>
+    <button class="btn btn-primary" bindtap="showTransfer">转移服务经销商</button>
+  </view>
+
+  <!-- 申请按钮（只读模式） -->
+  <view class="action-bar" wx:if="{{permission === 'readonly'}}">
+    <button class="btn btn-primary" bindtap="showApply">申请成为服务经销商</button>
+  </view>
+
+  <!-- 申请弹窗 -->
+  <view class="modal" wx:if="{{showApplyModal}}">
+    <view class="modal-mask"></view>
+    <view class="modal-content">
+      <text class="modal-title">申请成为服务经销商</text>
+      <textarea placeholder="请填写申请理由" bindinput="onApplyInput" value="{{applyReason}}" class="modal-input" />
+      <view class="modal-btns">
+        <button class="btn btn-default" bindtap="hideApply">取消</button>
+        <button class="btn btn-primary" bindtap="submitApply">提交</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 转移弹窗 -->
+  <view class="modal" wx:if="{{showTransferModal}}">
+    <view class="modal-mask"></view>
+    <view class="modal-content">
+      <text class="modal-title">转移服务经销商</text>
+      <picker mode="selector" range="{{dealers}}" range-key="dealer_name" bindchange="onTransferTarget">
+        <view class="picker-display">{{transferTarget ? transferTarget : '请选择目标经销商'}}</view>
+      </picker>
+      <textarea placeholder="请填写转移理由" bindinput="onTransferReason" value="{{transferReason}}" class="modal-input" />
+      <view class="modal-btns">
+        <button class="btn btn-default" bindtap="hideTransfer">取消</button>
+        <button class="btn btn-primary" bindtap="submitTransfer">提交</button>
+      </view>
+    </view>
+  </view>
+</view>

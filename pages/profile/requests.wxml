@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="card" wx:for="{{list}}" wx:key="id">
+    <view class="req-header">
+      <text class="tag tag-{{item.status === 'pending' ? 'pending' : item.status === 'approved' ? 'done' : 'expired'}}">{{item.status === 'pending' ? '待审批' : item.status === 'approved' ? '已通过' : '已拒绝'}}</text>
+      <text class="req-type">{{item.request_type === 'claim' ? '认领申请' : '转移申请'}}</text>
+    </view>
+    <view class="info-row"><text class="info-label">VIN</text><text class="info-value">{{item.vin}}</text></view>
+    <view class="info-row"><text class="info-label">申请方</text><text class="info-value">{{item.request_dealer_name || item.request_dealer}}</text></view>
+    <view class="info-row"><text class="info-label">理由</text><text class="info-value">{{item.reason || '-'}}</text></view>
+    <view class="info-row" wx:if="{{item.status === 'rejected'}}"><text class="info-label">拒绝原因</text><text class="info-value reject-reason">{{item.admin_remark || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">申请时间</text><text class="info-value">{{item.created_at}}</text></view>
+  </view>
+  <view class="empty" wx:if="{{list.length === 0}}">暂无申请记录</view>
+</view>

@@ -1,0 +1,20 @@
+<view class="container" wx:if="{{activity}}">
+  <view class="card">
+    <view class="status-row">
+      <text class="tag tag-{{activity.status === 'completed' ? 'done' : 'draft'}}">{{activity.status === 'completed' ? '已完成' : '草稿'}}</text>
+    </view>
+    <view class="info-row"><text class="info-label">客户</text><text class="info-value">{{activity.customer_name}}</text></view>
+    <view class="info-row"><text class="info-label">目的</text><text class="info-value">{{activity.visit_purpose || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">方式</text><text class="info-value">{{activity.visit_method === 'phone' ? '电话' : activity.visit_method === 'wechat' ? '微信' : '线下'}}</text></view>
+    <view class="info-row"><text class="info-label">地点</text><text class="info-value">{{activity.visit_location || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">时间</text><text class="info-value">{{activity.visit_time || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">内容</text><text class="info-value">{{activity.content || '-'}}</text></view>
+    <view class="info-row"><text class="info-label">创建时间</text><text class="info-value">{{activity.created_at}}</text></view>
+  </view>
+  <view class="card" wx:if="{{activity.photos.length > 0}}">
+    <text class="section-title">照片</text>
+    <view class="photo-grid">
+      <image wx:for="{{activity.photos}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="photo" bindtap="previewPhoto" data-url="{{item}}" />
+    </view>
+  </view>
+</view>

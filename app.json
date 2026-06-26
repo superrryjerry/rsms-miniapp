@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/pool/list",
+    "pages/pool/detail",
+    "pages/vehicle/list",
+    "pages/vehicle/detail",
+    "pages/customer/list",
+    "pages/customer/detail",
+    "pages/lead/list",
+    "pages/activity/list",
+    "pages/activity/create",
+    "pages/activity/detail",
+    "pages/profile/index",
+    "pages/profile/requests"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1890ff",
+    "navigationBarTitleText": "RSMS 经销商CRM",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#1890ff",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "工作台", "iconPath": "assets/home.png", "selectedIconPath": "assets/home-active.png" },
+      { "pagePath": "pages/vehicle/list", "text": "车辆", "iconPath": "assets/car.png", "selectedIconPath": "assets/car-active.png" },
+      { "pagePath": "pages/customer/list", "text": "客户", "iconPath": "assets/user.png", "selectedIconPath": "assets/user-active.png" },
+      { "pagePath": "pages/profile/index", "text": "我的", "iconPath": "assets/me.png", "selectedIconPath": "assets/me-active.png" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

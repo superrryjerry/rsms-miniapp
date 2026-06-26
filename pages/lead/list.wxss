@@ -1,0 +1,6 @@
+.filter-bar { background: #fff; padding: 20rpx 24rpx; font-size: 28rpx; color: #1890ff; margin-bottom: 16rpx; }
+.lead-card { margin: 0 20rpx 16rpx; }
+.lead-header { display: flex; align-items: center; margin-bottom: 12rpx; }
+.lead-type { font-size: 26rpx; color: #666; margin-left: 12rpx; }
+.lead-actions { display: flex; gap: 16rpx; margin-top: 16rpx; justify-content: flex-end; }
+.loading-tip { text-align: center; padding: 20rpx; color: #999; font-size: 24rpx; }

@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="welcome card">
+    <text class="greeting">你好，{{userInfo.name || '用户'}}</text>
+    <text class="dealer">{{userInfo.dealer_code || ''}}</text>
+    <view class="lead-badge" wx:if="{{unreadLeads > 0}}">
+      <text>{{unreadLeads}} 条待处理线索</text>
+    </view>
+  </view>
+
+  <view class="section-title">快捷入口</view>
+  <view class="grid">
+    <view class="grid-item" wx:for="{{quickEntries}}" wx:key="name" bindtap="goPage" data-url="{{item.url}}">
+      <text class="grid-icon">{{item.icon}}</text>
+      <text class="grid-name">{{item.name}}</text>
+    </view>
+  </view>
+</view>

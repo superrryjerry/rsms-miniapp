@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="card">
+    <view class="form-item">
+      <text class="label">客户名称 *</text>
+      <input placeholder="请输入客户名称" value="{{customer_name}}" bindinput="onInput" data-field="customer_name" />
+    </view>
+    <view class="form-item">
+      <text class="label">拜访目的</text>
+      <input placeholder="请输入拜访目的" value="{{visit_purpose}}" bindinput="onInput" data-field="visit_purpose" />
+    </view>
+    <view class="form-item">
+      <text class="label">拜访方式 *</text>
+      <picker mode="selector" range="{{methods}}" value="{{methodIndex}}" bindchange="onMethodChange">
+        <view class="picker-value">{{methods[methodIndex]}} ▼</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">拜访地点</text>
+      <view class="location-row">
+        <input placeholder="地点" value="{{visit_location}}" bindinput="onInput" data-field="visit_location" class="location-input" />
+        <button size="mini" bindtap="getLocation">定位</button>
+      </view>
+    </view>
+    <view class="form-item">
+      <text class="label">拜访时间</text>
+      <picker mode="date" value="{{visit_time}}" bindchange="onDateChange">
+        <view class="picker-value">{{visit_time || '请选择日期'}} ▼</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">拜访内容</text>
+      <textarea placeholder="请输入拜访内容" value="{{content}}" bindinput="onInput" data-field="content" class="textarea" />
+    </view>
+    <view class="form-item">
+      <text class="label">照片（最多9张）</text>
+      <view class="photo-grid">
+        <view class="photo-item" wx:for="{{photos}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFill" class="photo-img" />
+          <view class="photo-del" catchtap="removePhoto" data-index="{{index}}">×</view>
+        </view>
+        <view class="photo-add" bindtap="choosePhoto" wx:if="{{photos.length < 9}}">+</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-group">
+    <button class="btn btn-default" bindtap="saveDraft">保存草稿</button>
+    <button class="btn btn-primary" bindtap="saveComplete">完成</button>
+  </view>
+</view>

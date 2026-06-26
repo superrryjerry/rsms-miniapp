@@ -1,0 +1,14 @@
+<view class="list-container">
+  <view class="card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+    <view class="activity-header">
+      <text class="tag tag-{{item.status === 'completed' ? 'done' : 'draft'}}">{{item.status === 'completed' ? '已完成' : '草稿'}}</text>
+      <text class="method">{{item.visit_method === 'phone' ? '电话' : item.visit_method === 'wechat' ? '微信' : '线下'}}</text>
+    </view>
+    <text class="customer-name">{{item.customer_name}}</text>
+    <text class="activity-preview">{{item.content || '无内容'}}</text>
+    <text class="time">{{item.visit_time || item.created_at}}</text>
+  </view>
+  <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无销售活动</view>
+  <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
+</view>
+<view class="fab" bindtap="goCreate">+ 新增</view>
