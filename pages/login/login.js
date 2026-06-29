@@ -4,10 +4,10 @@ Page({
   onInput(e) { this.setData({ [e.currentTarget.dataset.field]: e.detail.value }); },
   async onLogin() {
     const { phone, password } = this.data;
-    if (!phone || !password) return wx.showToast({ title: '请输入手机号和密码', icon: 'none' });
+    if (!phone || !password) return wx.showToast({ title: '请输入手机号/账号和密码', icon: 'none' });
     wx.showLoading({ title: '登录中...' });
     try {
-      const res = await app.request({ url: '/auth/login', method: 'POST', data: { phone, password } });
+      const res = await app.request({ url: '/auth/login', method: 'POST', data: { phone, password, source: 'miniapp' } });
       wx.hideLoading();
       if (res.code === 0) {
         app.globalData.token = res.data.token;

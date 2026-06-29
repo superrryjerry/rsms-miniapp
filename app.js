@@ -2,10 +2,10 @@
 App({
   globalData: {
     // 环境配置：根据微信小程序环境自动切换
-    // 开发环境使用 localhost，发布时需替换为线上地址
+    // 开发环境使用服务器IP，发布时需替换为线上地址
     envConfig: {
-      development: 'http://localhost:3000/api',
-      production: 'https://your-production-domain.com/api' // TODO: 替换为实际生产地址
+      development: 'http://175.27.167.200/api',
+      production: 'https://scaniacrm.top/api' // TODO: 等ICP备案通过后启用
     },
     baseUrl: '',
     token: '',

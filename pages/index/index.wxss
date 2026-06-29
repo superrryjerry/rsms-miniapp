@@ -1,29 +1,72 @@
-.welcome { padding: 40rpx 32rpx; }
-.greeting { display: block; font-size: 36rpx; font-weight: bold; color: #333; }
-.dealer { display: block; font-size: 24rpx; color: #999; margin-top: 8rpx; }
+.welcome { 
+  padding: 40rpx 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.greeting { 
+  display: block; 
+  font-size: 40rpx; 
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.dealer { 
+  display: block; 
+  font-size: 26rpx; 
+  opacity: 0.9;
+}
+
 .lead-badge {
-  margin-top: 16rpx;
-  background: #fff1f0;
-  color: #f5222d;
-  padding: 8rpx 20rpx;
-  border-radius: 20rpx;
+  margin-top: 20rpx;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  padding: 10rpx 24rpx;
+  border-radius: 24rpx;
   display: inline-block;
   font-size: 24rpx;
+  backdrop-filter: blur(10px);
 }
-.section-title { font-size: 30rpx; font-weight: bold; margin: 24rpx 0 16rpx; color: #333; }
+
+.section-title { 
+  font-size: 32rpx; 
+  font-weight: bold; 
+  margin: 30rpx 0 20rpx; 
+  color: #333;
+  padding-left: 10rpx;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
   background: #fff;
-  border-radius: 12rpx;
-  padding: 20rpx 0;
+  border-radius: 16rpx;
+  padding: 30rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
 }
+
 .grid-item {
   width: 33.33%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24rpx 0;
+  padding: 30rpx 0;
+  transition: all 0.3s;
 }
-.grid-icon { font-size: 48rpx; margin-bottom: 8rpx; }
-.grid-name { font-size: 24rpx; color: #666; }
+
+.grid-item:active {
+  background: #f5f5f5;
+}
+
+.grid-icon { 
+  font-size: 56rpx; 
+  margin-bottom: 12rpx;
+}
+
+.grid-name { 
+  font-size: 26rpx; 
+  color: #666;
+  font-weight: 500;
+}
