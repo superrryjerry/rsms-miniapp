@@ -1,6 +1,9 @@
 <view class="container" wx:if="{{vehicle}}">
+  <!-- 车辆基本信息 -->
   <view class="card">
+    <view class="section-title">🚗 车辆信息</view>
     <view class="info-row"><text class="info-label">VIN</text><text class="info-value">{{vehicle.vin}}</text></view>
+    <view class="info-row"><text class="info-label">完整VIN</text><text class="info-value">{{vehicle.vin_full || '-'}}</text></view>
     <view class="info-row"><text class="info-label">车牌</text><text class="info-value">{{vehicle.license_plate || '-'}}</text></view>
     <view class="info-row"><text class="info-label">客户</text><text class="info-value">{{vehicle.customer_name || '-'}}</text></view>
     <view class="info-row"><text class="info-label">车型</text><text class="info-value">{{vehicle.model || '-'}}</text></view>
@@ -8,4 +11,57 @@
     <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{vehicle.sales_dealer || '-'}}</text></view>
     <view class="info-row"><text class="info-label">交付日期</text><text class="info-value">{{vehicle.delivery_date || '-'}}</text></view>
   </view>
+
+  <!-- 合同历史 -->
+  <view class="card">
+    <view class="section-title">📋 合同历史 ({{contracts.length}})</view>
+    <view wx:if="{{contracts.length === 0}}" class="empty-tip">暂无合同记录</view>
+    <view wx:for="{{contracts}}" wx:key="index" class="history-item">
+      <view class="history-header">
+        <text class="history-title">{{item.contract_no || '未编号'}}</text>
+        <text class="tag tag-{{item.status === 'active' ? 'mine' : 'expired'}}">{{item.status === 'active' ? '生效中' : '已结束'}}</text>
+      </view>
+      <view class="info-row"><text class="info-label">合同类型</text><text class="info-value">{{item.contract_type || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">开始日期</text><text class="info-value">{{item.start_date || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">结束日期</text><text class="info-value">{{item.end_date || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">约定里程</text><text class="info-value">{{item.mileage ? item.mileage + ' km' : '-'}}</text></view>
+      <view class="info-row"><text class="info-label">约定次数</text><text class="info-value">{{item.times ? item.times + ' 次' : '-'}}</text></view>
+    </view>
+  </view>
+
+  <!-- 工单历史 -->
+  <view class="card">
+    <view class="section-title">🔧 工单历史 ({{workOrders.length}})</view>
+    <view wx:if="{{workOrders.length === 0}}" class="empty-tip">暂无工单记录</view>
+    <view wx:for="{{workOrders}}" wx:key="index" class="history-item">
+      <view class="history-header">
+        <text class="history-title">{{item.order_no || '未编号'}}</text>
+        <text class="tag tag-warning">{{item.order_type || '工单'}}</text>
+      </view>
+      <view class="info-row"><text class="info-label">工单日期</text><text class="info-value">{{item.order_date || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{item.service_dealer || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">工单内容</text><text class="info-value">{{item.order_content || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">金额</text><text class="info-value">{{item.amount ? '¥' + item.amount : '-'}}</text></view>
+    </view>
+  </view>
+
+  <!-- 服务历史统计 -->
+  <view class="card" wx:if="{{serviceHistory.length > 0}}">
+    <view class="section-title">📊 服务经销商统计</view>
+    <view wx:for="{{serviceHistory}}" wx:key="index" class="service-stat">
+      <view class="service-name">{{item.service_dealer}}</view>
+      <view class="service-info">
+        <text>{{item.order_count}} 次服务</text>
+        <text wx:if="{{item.first_date}}"> | {{item.first_date}} ~ {{item.last_date}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 认领按钮 -->
+  <view class="action-area">
+    <button class="btn btn-primary" bindtap="onClaim">认领这辆车</button>
+    <button class="btn btn-default" bindtap="goBack">返回</button>
+  </view>
 </view>
+
+<view wx:if="{{loading}}" class="loading">加载中...</view>
