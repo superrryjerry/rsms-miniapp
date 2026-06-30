@@ -35,11 +35,19 @@ Page({
   },
   // 转移服务经销商
   async showTransfer() {
-    const res = await app.request({ url: '/admin/dealers' });
-    if (res.code === 0) this.setData({ dealers: res.data.filter(d => d.dealer_code !== this.data.vehicle.service_dealer), showTransferModal: true });
+    const res = await app.request({ url: '/vehicles/dealer-list' });
+    if (res.code === 0) {
+      this.setData({ dealers: res.data.filter(d => d.dealer_code !== this.data.vehicle.service_dealer), showTransferModal: true });
+    } else {
+      wx.showToast({ title: res.msg || '获取经销商列表失败', icon: 'none' });
+    }
   },
   hideTransfer() { this.setData({ showTransferModal: false, transferTarget: '', transferReason: '' }); },
-  onTransferTarget(e) { this.setData({ transferTarget: e.detail.value }); },
+  onTransferTarget(e) {
+    const idx = e.detail.value;
+    const dealer = this.data.dealers[idx];
+    this.setData({ transferTarget: dealer ? dealer.dealer_code : '', transferTargetName: dealer ? dealer.dealer_name : '' });
+  },
   onTransferReason(e) { this.setData({ transferReason: e.detail.value }); },
   async submitTransfer() {
     if (!this.data.transferTarget) return wx.showToast({ title: '请选择目标经销商', icon: 'none' });

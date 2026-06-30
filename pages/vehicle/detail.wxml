@@ -70,7 +70,7 @@
     <view class="modal-content">
       <text class="modal-title">转移服务经销商</text>
       <picker mode="selector" range="{{dealers}}" range-key="dealer_name" bindchange="onTransferTarget">
-        <view class="picker-display">{{transferTarget ? transferTarget : '请选择目标经销商'}}</view>
+        <view class="picker-display">{{transferTargetName || '请选择目标经销商'}}</view>
       </picker>
       <textarea placeholder="请填写转移理由" bindinput="onTransferReason" value="{{transferReason}}" class="modal-input" />
       <view class="modal-btns">

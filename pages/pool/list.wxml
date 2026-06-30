@@ -6,7 +6,7 @@
       <text class="sub-text">{{item.customer_name || '未知客户'}} | {{item.model || '-'}}</text>
       <text class="sub-text">车牌: {{item.license_plate || '-'}}</text>
     </view>
-    <button class="claim-btn" catchtap="onClaim" data-vin="{{item.vin}}">认领</button>
+    <view class="claim-btn" catchtap="onClaim" data-vin="{{item.vin}}">认领</view>
   </view>
   <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无数据</view>
   <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
