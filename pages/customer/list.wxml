@@ -1,9 +1,6 @@
 <view class="search-bar">
   <input placeholder="搜索客户名称" bindconfirm="onSearch" value="{{keyword}}" />
 </view>
-<view class="add-btn-wrap">
-  <button class="add-btn" bindtap="goAdd">+ 新增客户</button>
-</view>
 <view class="list-container">
   <view class="list-item" wx:for="{{list}}" wx:key="id">
     <view class="item-left" bindtap="goDetail" data-name="{{item.customer_name}}">
@@ -20,4 +17,10 @@
   <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无数据</view>
   <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
   <view class="loading-tip" wx:if="{{noMore && list.length > 0}}">没有更多了</view>
+</view>
+<!-- 底部悬浮新增按钮 -->
+<view class="fab-btn" bindtap="goAdd">
+  <view class="fab-circle">
+    <text class="fab-icon">+</text>
+  </view>
 </view>

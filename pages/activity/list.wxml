@@ -11,4 +11,9 @@
   <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无销售活动</view>
   <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
 </view>
-<view class="fab" bindtap="goCreate">+ 新增</view>
+<!-- 底部悬浮新增按钮 -->
+<view class="fab-btn" bindtap="goCreate">
+  <view class="fab-circle">
+    <text class="fab-icon">+</text>
+  </view>
+</view>
