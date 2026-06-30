@@ -1,4 +1,9 @@
-<view class="search-bar"><input placeholder="搜索客户名称" bindconfirm="onSearch" value="{{keyword}}" /></view>
+<view class="search-bar">
+  <input placeholder="搜索客户名称" bindconfirm="onSearch" value="{{keyword}}" />
+</view>
+<view class="add-btn-wrap">
+  <button class="add-btn" bindtap="goAdd">+ 新增客户</button>
+</view>
 <view class="list-container">
   <view class="list-item" wx:for="{{list}}" wx:key="id">
     <view class="item-left" bindtap="goDetail" data-name="{{item.customer_name}}">

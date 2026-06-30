@@ -47,5 +47,6 @@ Page({
       wx.showToast({ title: '更新失败', icon: 'error' });
     }
   },
-  goDetail(e) { wx.navigateTo({ url: '/pages/customer/detail?name=' + encodeURIComponent(e.currentTarget.dataset.name) }); }
+  goDetail(e) { wx.navigateTo({ url: '/pages/customer/detail?name=' + encodeURIComponent(e.currentTarget.dataset.name) }); },
+  goAdd() { wx.navigateTo({ url: '/pages/customer/add' }); }
 });

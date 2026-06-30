@@ -8,6 +8,7 @@
     "pages/vehicle/detail",
     "pages/customer/list",
     "pages/customer/detail",
+    "pages/customer/add",
     "pages/lead/list",
     "pages/activity/list",
     "pages/activity/create",

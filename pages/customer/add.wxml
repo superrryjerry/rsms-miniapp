@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="label required">客户名称</text>
+      <input class="input" placeholder="请输入客户名称" value="{{customer_name}}" bindinput="onNameInput" />
+    </view>
+    <view class="form-item">
+      <text class="label">所在市</text>
+      <input class="input" placeholder="请输入所在市（选填）" value="{{city}}" bindinput="onCityInput" />
+    </view>
+    <view class="form-item">
+      <text class="label">注册信息</text>
+      <textarea class="textarea" placeholder="请输入注册信息（选填）" value="{{registration_info}}" bindinput="onRegInput" />
+    </view>
+  </view>
+
+  <view class="tip-box">
+    <text class="tip-icon">💡</text>
+    <text class="tip-text">新增客户后，可通过客户名称自动匹配车辆表中的车辆信息</text>
+  </view>
+
+  <button class="btn-submit" bindtap="onSubmit" loading="{{submitting}}">确认新增</button>
+</view>
