@@ -24,7 +24,7 @@
 
   <!-- 预警卡片 -->
   <view class="warning-section">
-    <view class="section-title">⚠️ 超半年无工单预警</view>
+    <view class="section-title">⚠️ 超8个月无工单预警</view>
     
     <view class="warning-card card" bindtap="goInactiveVehicles">
       <view class="warning-left">
@@ -60,8 +60,8 @@
   <!-- 说明 -->
   <view class="tips card">
     <text class="tips-title">💡 说明</text>
-    <text class="tips-item">• 超半年无工单：车辆最新工单日期距今超过6个月</text>
-    <text class="tips-item">• 客户超期：该客户名下所有车辆均超过半年无工单</text>
+    <text class="tips-item">• 超8个月无工单：车辆最新工单日期距今超过240天（跨所有经销商）</text>
+    <text class="tips-item">• 客户超期：该客户名下所有车辆均超过8个月无工单</text>
     <text class="tips-item">• 预警标记会随工单数据自动更新</text>
   </view>
 </view>

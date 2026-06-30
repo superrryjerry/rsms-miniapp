@@ -1,8 +1,8 @@
 <view class="container">
   <view class="header card">
     <text class="header-icon">⚠️</text>
-    <text class="header-title">超半年无工单车辆</text>
-    <text class="header-desc">以下车辆最新工单日期距今超过6个月或从未有工单记录</text>
+    <text class="header-title">超8个月无工单车辆</text>
+    <text class="header-desc">以下车辆最新工单日期距今超过240天或从未有工单记录（跨所有经销商）</text>
   </view>
 
   <view class="list" wx:if="{{list.length > 0}}">
