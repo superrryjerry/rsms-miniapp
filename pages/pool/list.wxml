@@ -1,4 +1,4 @@
-<view class="search-bar"><input placeholder="搜索VIN/车牌/客户/车型" bindconfirm="onSearch" value="{{keyword}}" /></view>
+<view class="search-bar"><input placeholder="搜索VIN/车牌" bindconfirm="onSearch" value="{{keyword}}" /></view>
 <view class="list-container">
   <view class="list-item" wx:for="{{list}}" wx:key="vin">
     <view class="item-left" bindtap="goDetail" data-vin="{{item.vin}}">
