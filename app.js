@@ -5,7 +5,8 @@ App({
     // 开发环境使用服务器IP，发布时需替换为线上地址
     envConfig: {
       development: 'http://175.27.167.200/api',
-      production: 'https://scaniacrm.top/api' // TODO: 等ICP备案通过后启用
+      trial: 'https://scaniacrm.top/api',  // 体验版
+      production: 'https://scaniacrm.top/api'
     },
     baseUrl: '',
     token: '',
