@@ -40,5 +40,11 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "requiredPrivateInfos": ["getLocation", "chooseLocation"],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于获取您的拜访地点"
+    }
+  }
 }

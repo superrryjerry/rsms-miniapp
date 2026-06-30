@@ -30,10 +30,23 @@ Page({
   onMethodChange(e) { this.setData({ methodIndex: e.detail.value, visit_method: this.data.methodValues[e.detail.value] }); },
   onDateChange(e) { this.setData({ visit_time: e.detail.value }); },
   getLocation() {
-    wx.getLocation({
-      type: 'gcj02',
-      success: (res) => { this.setData({ location_lat: res.latitude, location_lng: res.longitude, visit_location: res.address || `${res.latitude},${res.longitude}` }); },
-      fail: () => wx.showToast({ title: '定位失败，请检查权限', icon: 'none' })
+    wx.chooseLocation({
+      success: (res) => {
+        this.setData({
+          visit_location: res.address || res.name || '',
+          location_lat: res.latitude,
+          location_lng: res.longitude
+        });
+      },
+      fail: (err) => {
+        if (err.errMsg && err.errMsg.indexOf('auth') > -1) {
+          wx.showToast({ title: '请允许定位权限', icon: 'none' });
+        } else if (err.errMsg && err.errMsg.indexOf('cancel') > -1) {
+          // 用户主动取消，不提示
+        } else {
+          wx.showToast({ title: '定位失败，请检查权限', icon: 'none' });
+        }
+      }
     });
   },
   choosePhoto() {
