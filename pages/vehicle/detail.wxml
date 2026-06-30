@@ -35,8 +35,7 @@
     <view class="card" wx:for="{{workOrders}}" wx:key="id">
       <view class="info-row"><text class="info-label">日期</text><text class="info-value">{{item.order_date || '-'}}</text></view>
       <view class="info-row"><text class="info-label">类型</text><text class="info-value">{{item.order_type || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">内容</text><text class="info-value">{{item.order_content || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">金额</text><text class="info-value">{{item.amount || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{item.service_dealer || '-'}}</text></view>
     </view>
     <view class="empty" wx:if="{{workOrders.length === 0}}">暂无工单</view>
   </view>
