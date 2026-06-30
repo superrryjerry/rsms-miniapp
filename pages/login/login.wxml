@@ -1,18 +1,35 @@
 <view class="login-page">
-  <view class="logo-area">
-    <image class="logo" src="/assets/logo.png" mode="aspectFit"></image>
-    <text class="title">个人拜访rsms跟进小助手</text>
-    <text class="subtitle">随时记录 · 定时提醒 · 轻松跟进</text>
+  <view class="login-card">
+    <view class="logo-area">
+      <view class="logo-circle">
+        <text class="logo-text">RS</text>
+      </view>
+      <text class="title">个人拜访rsms跟进小助手</text>
+      <text class="subtitle">随时记录 · 定时提醒 · 轻松跟进</text>
+    </view>
+    
+    <view class="form">
+      <view class="input-group">
+        <text class="input-label">账号</text>
+        <view class="input-wrapper">
+          <text class="input-icon">👤</text>
+          <input class="input" placeholder="请输入账号" bindinput="onInput" data-field="phone" />
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">密码</text>
+        <view class="input-wrapper">
+          <text class="input-icon">🔒</text>
+          <input class="input" placeholder="请输入密码" password bindinput="onInput" data-field="password" />
+        </view>
+      </view>
+      
+      <button class="btn-login" bindtap="onLogin">登 录</button>
+    </view>
   </view>
-  <view class="form">
-    <view class="input-wrapper">
-      <image class="input-icon" src="/assets/phone.png"></image>
-      <input class="input" placeholder="手机号/账号" bindinput="onInput" data-field="phone" />
-    </view>
-    <view class="input-wrapper">
-      <image class="input-icon" src="/assets/lock.png"></image>
-      <input class="input" placeholder="密码" password bindinput="onInput" data-field="password" />
-    </view>
-    <button class="btn-login" bindtap="onLogin">登 录</button>
+  
+  <view class="footer">
+    <text class="footer-text">© 2024 RSMS 版权所有</text>
   </view>
 </view>
