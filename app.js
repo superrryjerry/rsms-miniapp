@@ -22,6 +22,9 @@ App({
     if (token) {
       this.globalData.token = token;
       this.globalData.userInfo = userInfo;
+    } else {
+      // 没有登录信息，跳转到登录页
+      wx.reLaunch({ url: '/pages/login/login' });
     }
   },
 

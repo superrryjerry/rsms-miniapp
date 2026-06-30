@@ -24,6 +24,13 @@ Page({
     } catch (e) {}
   },
   goPage(e) {
-    wx.navigateTo({ url: e.currentTarget.dataset.url });
+    const url = e.currentTarget.dataset.url;
+    // tabBar页面需要用switchTab
+    const tabBarPages = ['/pages/index/index', '/pages/vehicle/list', '/pages/customer/list', '/pages/mine/mine'];
+    if (tabBarPages.includes(url)) {
+      wx.switchTab({ url });
+    } else {
+      wx.navigateTo({ url });
+    }
   }
 });

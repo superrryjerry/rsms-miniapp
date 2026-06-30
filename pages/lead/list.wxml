@@ -5,7 +5,7 @@
   <view class="card lead-card" wx:for="{{list}}" wx:key="id">
     <view class="lead-header">
       <text class="tag tag-{{item.status === 'pending' ? 'warning' : item.status === 'handled' ? 'done' : 'pending'}}">{{item.status === 'pending' ? '待处理' : item.status === 'handled' ? '已处理' : '已读'}}</text>
-      <text class="lead-type">{{item.lead_type}}</text>
+      <text class="lead-type">{{item.lead_type === 'warranty_end' ? '质保到期' : item.lead_type === 'contract_time' ? '合同到期' : item.lead_type === 'contract_mileage' ? '合同里程' : item.lead_type === 'contract_count' ? '合同次数' : item.lead_type}}</text>
     </view>
     <view class="info-row"><text class="info-label">VIN</text><text class="info-value" bindtap="goVehicle" data-vin="{{item.vin}}">{{item.vin}}</text></view>
     <view class="info-row"><text class="info-label">触发值</text><text class="info-value">{{item.trigger_value || '-'}}</text></view>
