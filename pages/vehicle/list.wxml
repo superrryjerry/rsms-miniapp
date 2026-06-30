@@ -7,6 +7,7 @@
       <view class="vin-row">
         <text class="vin-text">{{item.vin}}</text>
         <text class="tag tag-mine" wx:if="{{item.is_mine}}">我的车辆</text>
+        <text class="tag tag-warning" wx:if="{{item.warning}}">⚠️</text>
       </view>
       <text class="sub-text">{{item.customer_name || '未知客户'}} | {{item.model || '-'}}</text>
       <text class="sub-text">归属: {{item.service_dealer}}</text>

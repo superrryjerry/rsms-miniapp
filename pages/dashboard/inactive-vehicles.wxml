@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="header card">
+    <text class="header-icon">⚠️</text>
+    <text class="header-title">超半年无工单车辆</text>
+    <text class="header-desc">以下车辆最新工单日期距今超过6个月或从未有工单记录</text>
+  </view>
+
+  <view class="list" wx:if="{{list.length > 0}}">
+    <view class="list-item card" wx:for="{{list}}" wx:key="vin">
+      <view class="item-main">
+        <text class="item-vin">{{item.vin}}</text>
+        <text class="item-plate" wx:if="{{item.license_plate}}">{{item.license_plate}}</text>
+      </view>
+      <view class="item-info">
+        <text class="item-label">客户：</text>
+        <text class="item-value">{{item.customer_name || '未知'}}</text>
+      </view>
+      <view class="item-info">
+        <text class="item-label">最新工单：</text>
+        <text class="item-value {{item.last_order_date ? 'warning' : 'danger'}}">
+          {{item.last_order_display}}
+        </text>
+      </view>
+      <view class="item-info" wx:if="{{item.days_since}}">
+        <text class="item-label">已超期：</text>
+        <text class="item-value danger">{{item.days_since}}天</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text class="empty-icon">✅</text>
+    <text class="empty-text">暂无超期车辆</text>
+  </view>
+</view>

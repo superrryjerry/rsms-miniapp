@@ -1,0 +1,67 @@
+<view class="container">
+  <!-- 经销商信息卡片 -->
+  <view class="dealer-card card">
+    <view class="dealer-icon">🏢</view>
+    <view class="dealer-info">
+      <text class="dealer-name">{{dealerName}}</text>
+      <text class="dealer-code">{{dealerCode}}</text>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-grid">
+    <view class="stat-card card" bindtap="goVehicles">
+      <text class="stat-icon">🚗</text>
+      <text class="stat-number">{{vehicleCount}}</text>
+      <text class="stat-label">我的车辆</text>
+    </view>
+    <view class="stat-card card" bindtap="goCustomers">
+      <text class="stat-icon">👤</text>
+      <text class="stat-number">{{customerCount}}</text>
+      <text class="stat-label">我的客户</text>
+    </view>
+  </view>
+
+  <!-- 预警卡片 -->
+  <view class="warning-section">
+    <view class="section-title">⚠️ 超半年无工单预警</view>
+    
+    <view class="warning-card card" bindtap="goInactiveVehicles">
+      <view class="warning-left">
+        <text class="warning-icon">🚗</text>
+        <view class="warning-info">
+          <text class="warning-title">车辆超期未工单</text>
+          <text class="warning-desc">点击查看详细VIN列表</text>
+        </view>
+      </view>
+      <view class="warning-right">
+        <text class="warning-number">{{inactiveVehicleCount}}</text>
+        <text class="warning-unit">台</text>
+        <text class="warning-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="warning-card card" bindtap="goInactiveCustomers">
+      <view class="warning-left">
+        <text class="warning-icon">👤</text>
+        <view class="warning-info">
+          <text class="warning-title">客户超期未工单</text>
+          <text class="warning-desc">点击查看详细客户列表</text>
+        </view>
+      </view>
+      <view class="warning-right">
+        <text class="warning-number">{{inactiveCustomerCount}}</text>
+        <text class="warning-unit">个</text>
+        <text class="warning-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 说明 -->
+  <view class="tips card">
+    <text class="tips-title">💡 说明</text>
+    <text class="tips-item">• 超半年无工单：车辆最新工单日期距今超过6个月</text>
+    <text class="tips-item">• 客户超期：该客户名下所有车辆均超过半年无工单</text>
+    <text class="tips-item">• 预警标记会随工单数据自动更新</text>
+  </view>
+</view>

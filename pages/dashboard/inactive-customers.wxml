@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="header card">
+    <text class="header-icon">⚠️</text>
+    <text class="header-title">超半年无工单客户</text>
+    <text class="header-desc">以下客户名下所有车辆均超过6个月无工单记录</text>
+  </view>
+
+  <view class="list" wx:if="{{list.length > 0}}">
+    <view class="list-item card" wx:for="{{list}}" wx:key="customer_name" bindtap="goDetail" data-name="{{item.customer_name}}">
+      <view class="item-main">
+        <text class="item-name">{{item.customer_name}}</text>
+        <text class="item-tag" wx:if="{{item.my_tag}}">{{tagMap[item.my_tag] || item.my_tag}}</text>
+      </view>
+      <view class="item-info">
+        <text class="item-label">所在市：</text>
+        <text class="item-value">{{item.city || '未知'}}</text>
+      </view>
+      <view class="item-info">
+        <text class="item-label">服务经销商：</text>
+        <text class="item-value">{{item.service_dealers_summary || '未知'}}</text>
+      </view>
+      <view class="item-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text class="empty-icon">✅</text>
+    <text class="empty-text">暂无超期客户</text>
+  </view>
+</view>

@@ -4,6 +4,7 @@ Page({
     userInfo: null,
     unreadLeads: 0,
     quickEntries: [
+      { name: '看板', icon: '📊', url: '/pages/dashboard/index' },
       { name: '公海池', icon: '🌊', url: '/pages/pool/list' },
       { name: '线索', icon: '🔔', url: '/pages/lead/list' },
       { name: '车辆', icon: '🚗', url: '/pages/vehicle/list' },

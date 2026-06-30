@@ -1,0 +1,162 @@
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05);
+}
+
+/* 经销商卡片 */
+.dealer-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  color: #fff;
+}
+
+.dealer-icon {
+  font-size: 60rpx;
+  margin-right: 24rpx;
+}
+
+.dealer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dealer-name {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.dealer-code {
+  font-size: 26rpx;
+  opacity: 0.8;
+  margin-top: 8rpx;
+}
+
+/* 统计卡片 */
+.stats-grid {
+  display: flex;
+  gap: 20rpx;
+}
+
+.stat-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 20rpx;
+}
+
+.stat-icon {
+  font-size: 56rpx;
+  margin-bottom: 16rpx;
+}
+
+.stat-number {
+  font-size: 52rpx;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.stat-label {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+/* 预警区域 */
+.warning-section {
+  margin-top: 10rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+}
+
+.warning-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.warning-left {
+  display: flex;
+  align-items: center;
+}
+
+.warning-icon {
+  font-size: 48rpx;
+  margin-right: 24rpx;
+}
+
+.warning-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.warning-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.warning-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.warning-right {
+  display: flex;
+  align-items: center;
+}
+
+.warning-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.warning-unit {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 8rpx;
+  margin-right: 16rpx;
+}
+
+.warning-arrow {
+  font-size: 40rpx;
+  color: #ccc;
+}
+
+/* 说明卡片 */
+.tips {
+  margin-top: 20rpx;
+}
+
+.tips-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.tips-item {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  line-height: 1.8;
+}

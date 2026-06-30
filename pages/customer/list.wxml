@@ -7,6 +7,7 @@
       <view class="name-row">
         <text class="name-text">{{item.customer_name}}</text>
         <text class="tag-badge tag-{{item.my_tag || 'none'}}" wx:if="{{item.my_tag}}">{{item.my_tag === 'core' ? '核心' : item.my_tag === 'focus' ? '焦点' : item.my_tag === 'oasis' ? '绿洲' : item.my_tag === 'desert' ? '沙漠' : ''}}</text>
+        <text class="tag-warning" wx:if="{{item.warning}}">⚠️</text>
       </view>
       <text class="sub-text">服务经销商: {{item.service_dealers_summary || '-'}}</text>
     </view>
