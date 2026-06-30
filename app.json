@@ -14,7 +14,10 @@
     "pages/activity/create",
     "pages/activity/detail",
     "pages/profile/index",
-    "pages/profile/requests"
+    "pages/profile/requests",
+    "pages/profile/guide",
+    "pages/profile/about",
+    "pages/profile/agreement"
   ],
   "window": {
     "navigationBarBackgroundColor": "#1890ff",

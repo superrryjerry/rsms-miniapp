@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="logo-section">
+    <image class="logo" src="/assets/logo.png" mode="aspectFit"></image>
+    <text class="app-name">个人拜访rsms跟进小助手</text>
+    <text class="version">版本 1.0.0</text>
+  </view>
+
+  <view class="content-card">
+    <view class="section">
+      <text class="title">产品介绍</text>
+      <text class="desc">个人拜访rsms跟进小助手是一款专为经销商销售人员打造的客户跟进管理工具。帮助您随时随地记录拜访情况，智能提醒跟进任务，让客户关系维护更加轻松高效。</text>
+    </view>
+
+    <view class="section">
+      <text class="title">核心功能</text>
+      <view class="feature-list">
+        <view class="feature-item">
+          <text class="dot">•</text>
+          <text>车辆档案管理：查看负责车辆信息，支持公海认领</text>
+        </view>
+        <view class="feature-item">
+          <text class="dot">•</text>
+          <text>客户分类管理：自定义标签，精准分类客户</text>
+        </view>
+        <view class="feature-item">
+          <text class="dot">•</text>
+          <text>销售活动记录：支持多种拜访方式，完整记录跟进</text>
+        </view>
+        <view class="feature-item">
+          <text class="dot">•</text>
+          <text>智能线索提醒：合同到期、质保到期自动提醒</text>
+        </view>
+        <view class="feature-item">
+          <text class="dot">•</text>
+          <text>工单合同查询：一站式查看车辆服务历史</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="title">联系我们</text>
+      <text class="desc">如有任何问题或建议，欢迎联系您的系统管理员。</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text>© 2024 RSMS 版权所有</text>
+  </view>
+</view>

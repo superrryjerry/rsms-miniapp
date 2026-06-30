@@ -1,0 +1,57 @@
+.container {
+  padding: 24rpx;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.intro-card {
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+  text-align: center;
+  margin-bottom: 24rpx;
+}
+
+.app-name {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 12rpx;
+}
+
+.app-slogan {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 28rpx 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.section-title text:last-child {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}

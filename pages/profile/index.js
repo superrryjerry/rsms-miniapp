@@ -7,6 +7,9 @@ Page({
     if (!userInfo) wx.redirectTo({ url: '/pages/login/login' });
   },
   goRequests() { wx.navigateTo({ url: '/pages/profile/requests' }); },
+  goGuide() { wx.navigateTo({ url: '/pages/profile/guide' }); },
+  goAbout() { wx.navigateTo({ url: '/pages/profile/about' }); },
+  goAgreement() { wx.navigateTo({ url: '/pages/profile/agreement' }); },
   onLogout() {
     wx.showModal({
       title: '确认退出',

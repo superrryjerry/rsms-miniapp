@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="intro-card">
+    <text class="app-name">个人拜访rsms跟进小助手</text>
+    <text class="app-slogan">随时记录、定时提醒，让跟进工作更轻松</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="icon">👤</text>
+      <text>用户友好</text>
+    </view>
+    <text class="section-desc">简洁直观的界面设计，无需培训即可上手使用。支持手机号快速登录，数据云端同步，多设备无缝切换。</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="icon">🚗</text>
+      <text>车辆模块</text>
+    </view>
+    <text class="section-desc">查看个人负责的车辆信息，支持按VIN码或车牌搜索。可认领公海车辆，查看车辆详情、合同信息、工单记录等完整档案。</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="icon">📋</text>
+      <text>客户管理</text>
+    </view>
+    <text class="section-desc">管理您服务的客户列表，支持新增客户。通过客户名称自动匹配车辆信息，可为客户设置标签（核心/焦点/绿洲/沙漠），方便分类管理。</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="icon">📝</text>
+      <text>销售活动</text>
+    </view>
+    <text class="section-desc">记录每次客户拜访，支持电话、微信、线下等多种拜访方式。填写拜访内容，系统自动关联客户和车辆，形成完整的跟进记录。</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="icon">🔔</text>
+      <text>智能提醒</text>
+    </view>
+    <text class="section-desc">根据合同到期、质保到期等信息自动生成跟进线索，定时提醒您及时联系客户，不遗漏任何商机。</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="icon">📊</text>
+      <text>工单与合同</text>
+    </view>
+    <text class="section-desc">查看车辆的历史工单记录和合同详情，包括合同期限、里程、次数等信息，全面掌握车辆服务状态。</text>
+  </view>
+</view>

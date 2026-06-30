@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="content-card">
+    <view class="section">
+      <text class="title">用户协议</text>
+      <text class="subtitle">最后更新日期：2024年1月1日</text>
+      
+      <text class="heading">一、服务说明</text>
+      <text class="desc">个人拜访rsms跟进小助手（以下简称"本应用"）为您提供客户跟进管理、车辆档案管理、销售活动记录等服务。使用本应用即表示您同意遵守本协议的各项条款。</text>
+      
+      <text class="heading">二、账号安全</text>
+      <text class="desc">1. 您的账号由系统管理员分配，请妥善保管账号密码。\n2. 您对账号下的所有操作负责，如发现账号被盗用请立即联系管理员。\n3. 不得将账号转借他人使用。</text>
+      
+      <text class="heading">三、使用规范</text>
+      <text class="desc">1. 您应确保上传的信息真实、准确、合法。\n2. 不得利用本应用从事任何违法违规活动。\n3. 不得对本应用进行反向工程、反编译或反汇编。\n4. 我们保留对违反规定的账号进行限制或封禁的权利。</text>
+      
+      <text class="heading">四、知识产权</text>
+      <text class="desc">本应用的所有内容，包括但不限于文字、图片、软件、界面设计等，均受知识产权法保护，未经许可不得复制、修改或传播。</text>
+      
+      <text class="heading">五、免责声明</text>
+      <text class="desc">1. 因不可抗力导致的服务中断，我们不承担责任。\n2. 本应用不对因用户操作失误或不当使用造成的损失负责。\n3. 我们保留随时修改或终止服务的权利。</text>
+    </view>
+
+    <view class="section">
+      <text class="title">隐私政策</text>
+      <text class="subtitle">最后更新日期：2024年1月1日</text>
+      
+      <text class="heading">一、信息收集</text>
+      <text class="desc">我们会收集以下信息以提供服务：\n1. 账号信息：姓名、手机号、所属经销商等。\n2. 业务数据：客户信息、车辆信息、销售活动记录等。\n3. 设备信息：设备型号、操作系统版本等（用于优化服务）。</text>
+      
+      <text class="heading">二、信息使用</text>
+      <text class="desc">我们收集的信息仅用于：\n1. 提供客户跟进管理服务。\n2. 生成销售活动提醒和线索。\n3. 优化产品功能和用户体验。</text>
+      
+      <text class="heading">三、信息保护</text>
+      <text class="desc">1. 我们采用行业标准的安全措施保护您的信息。\n2. 您的业务数据仅您和您授权的同事可见。\n3. 未经您的同意，我们不会向第三方披露您的信息。</text>
+      
+      <text class="heading">四、信息共享</text>
+      <text class="desc">除以下情况外，我们不会共享您的信息：\n1. 获得您的明确同意。\n2. 根据法律法规要求或政府部门的强制要求。\n3. 为保护我们或公众的权利、财产或安全。</text>
+      
+      <text class="heading">五、您的权利</text>
+      <text class="desc">1. 您有权查看、修改您的个人信息。\n2. 您有权删除您创建的业务数据。\n3. 如需注销账号，请联系管理员处理。</text>
+      
+      <text class="heading">六、政策更新</text>
+      <text class="desc">我们可能会不时更新本隐私政策，更新后的政策将在应用内公布，建议您定期查看。</text>
+    </view>
+  </view>
+</view>

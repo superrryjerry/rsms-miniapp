@@ -1,8 +1,8 @@
 <view class="login-page">
   <view class="logo-area">
     <image class="logo" src="/assets/logo.png" mode="aspectFit"></image>
-    <text class="title">RSMS</text>
-    <text class="subtitle">经销商CRM管理系统</text>
+    <text class="title">个人拜访rsms跟进小助手</text>
+    <text class="subtitle">随时记录 · 定时提醒 · 轻松跟进</text>
   </view>
   <view class="form">
     <view class="input-wrapper">
