@@ -4,14 +4,20 @@
 <view class="list-container">
   <view class="card lead-card" wx:for="{{list}}" wx:key="id">
     <view class="lead-header">
-      <text class="tag tag-{{item.status === 'pending' ? 'warning' : item.status === 'handled' ? 'done' : 'pending'}}">{{item.status === 'pending' ? '待处理' : item.status === 'handled' ? '已处理' : '已读'}}</text>
-      <text class="lead-type">{{item.lead_type === 'warranty_end' ? '质保到期' : item.lead_type === 'contract_time' ? '合同到期' : item.lead_type === 'contract_mileage' ? '合同里程' : item.lead_type === 'contract_count' ? '合同次数' : item.lead_type}}</text>
+      <text class="tag tag-{{item.status === 'unfollowed' ? 'pending' : item.status === 'following' ? 'warning' : item.status === 'completed' ? 'done' : 'ignored'}}">{{item.status === 'unfollowed' ? '待处理' : item.status === 'following' ? '跟进中' : item.status === 'completed' ? '已处理' : item.status === 'ignored' ? '已忽略' : '待处理'}}</text>
+      <text class="lead-type">{{item.lead_type === 'warranty_end' ? '原厂质保到期' : item.lead_type === 'extended_warranty_end' ? '延保到期' : item.lead_type === 'contract_time' ? '合同到期' : item.lead_type === 'contract_mileage' ? '合同里程' : item.lead_type === 'contract_count' ? '合同次数' : item.lead_type}}</text>
+      <button class="action-btn" size="mini" bindtap="showActionSheet" data-id="{{item.id}}">操作</button>
     </view>
     <view class="info-row"><text class="info-label">VIN</text><text class="info-value" bindtap="goVehicle" data-vin="{{item.vin}}">{{item.vin}}</text></view>
-    <!-- 质保到期：触发值=交付日期，阈值=质保到期时间 -->
+    <!-- 原厂质保到期：触发值=交付日期，阈值=质保到期时间 -->
     <block wx:if="{{item.lead_type === 'warranty_end'}}">
       <view class="info-row"><text class="info-label">交付日期</text><text class="info-value">{{item.trigger_value || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">质保到期</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">原厂质保到期</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
+    </block>
+    <!-- 延保到期：触发值=延保合同开始日期，阈值=延保合同结束日期 -->
+    <block wx:elif="{{item.lead_type === 'extended_warranty_end'}}">
+      <view class="info-row"><text class="info-label">延保开始</text><text class="info-value">{{item.trigger_value || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">延保到期</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
     </block>
     <!-- 合同到期：触发值=合同类型，阈值=合同结束日期 -->
     <block wx:elif="{{item.lead_type === 'contract_time'}}">
@@ -34,10 +40,6 @@
       <view class="info-row"><text class="info-label">阈值</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
     </block>
     <view class="info-row"><text class="info-label">时间</text><text class="info-value">{{item.created_at}}</text></view>
-    <view class="lead-actions" wx:if="{{item.status === 'pending'}}">
-      <button size="mini" bindtap="markRead" data-id="{{item.id}}">标记已读</button>
-      <button size="mini" type="primary" bindtap="markHandled" data-id="{{item.id}}">标记已处理</button>
-    </view>
   </view>
   <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无线索</view>
   <view class="loading-tip" wx:if="{{loading}}">加载中...</view>

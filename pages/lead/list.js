@@ -1,7 +1,8 @@
 const app = getApp();
 const leadTypes = [
   { value: '', label: '全部' },
-  { value: 'warranty_end', label: '质保结束' },
+  { value: 'warranty_end', label: '原厂质保到期' },
+  { value: 'extended_warranty_end', label: '延保到期' },
   { value: 'contract_time', label: '合同时间' },
   { value: 'contract_mileage', label: '合同里程' },
   { value: 'contract_count', label: '合同次数' }
@@ -28,15 +29,21 @@ Page({
     this.setData({ loading: false });
     wx.stopPullDownRefresh();
   },
-  async markRead(e) {
+  showActionSheet(e) {
     const id = e.currentTarget.dataset.id;
-    await app.request({ url: '/leads/' + id + '/read', method: 'POST' });
-    this.setData({ page: 1, list: [], noMore: false }); this.loadData();
+    wx.showActionSheet({
+      itemList: ['跟进中', '已处理', '已忽略'],
+      success: (res) => {
+        const statusMap = ['following', 'completed', 'ignored'];
+        this.updateStatus(id, statusMap[res.tapIndex]);
+      }
+    });
   },
-  async markHandled(e) {
-    const id = e.currentTarget.dataset.id;
-    await app.request({ url: '/leads/' + id + '/handle', method: 'POST' });
-    this.setData({ page: 1, list: [], noMore: false }); this.loadData();
+  async updateStatus(id, status) {
+    await app.request({ url: '/leads/' + id + '/status', method: 'PUT', data: { status } });
+    wx.showToast({ title: '状态已更新', icon: 'success' });
+    this.setData({ page: 1, list: [], noMore: false });
+    this.loadData();
   },
   goVehicle(e) { wx.navigateTo({ url: '/pages/vehicle/detail?vin=' + e.currentTarget.dataset.vin }); }
 });
