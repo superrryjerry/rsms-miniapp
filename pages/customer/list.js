@@ -19,7 +19,12 @@ Page({
     this.setData({ loading: true });
     const res = await app.request({ url: '/customers/list', data: { page: this.data.page, size: 20, keyword: this.data.keyword } });
     if (res.code === 0) {
-      const newList = this.data.page === 1 ? res.data.list : [...this.data.list, ...res.data.list];
+      const list = res.data.list.map(item => {
+        const dealers = (item.service_dealers_summary || '').split(', ').filter(Boolean);
+        const short = dealers.length > 3 ? dealers.slice(0, 3).join(', ') + ` +${dealers.length - 3}` : dealers.join(', ') || '-';
+        return { ...item, service_dealers_short: short };
+      });
+      const newList = this.data.page === 1 ? list : [...this.data.list, ...list];
       this.setData({ list: newList, total: res.data.total, noMore: newList.length >= res.data.total });
     }
     this.setData({ loading: false });

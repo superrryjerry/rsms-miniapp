@@ -9,7 +9,7 @@
         <text class="tag-badge tag-{{item.my_tag || 'none'}}" wx:if="{{item.my_tag}}">{{item.my_tag === 'core' ? '核心' : item.my_tag === 'focus' ? '焦点' : item.my_tag === 'oasis' ? '绿洲' : item.my_tag === 'desert' ? '沙漠' : ''}}</text>
         <text class="tag-warning" wx:if="{{item.warning}}">⚠️</text>
       </view>
-      <text class="sub-text">服务经销商: {{item.service_dealers_summary || '-'}}</text>
+      <text class="sub-text">服务经销商: {{item.service_dealers_short}}</text>
     </view>
     <picker mode="selector" range="{{tagOptions}}" range-key="label" value="{{item.my_tag ? tagIndexMap[item.my_tag] : 0}}" bindchange="onTagChange" data-index="{{index}}" data-name="{{item.customer_name}}">
       <view class="tag-picker-btn">🏷️</view>
