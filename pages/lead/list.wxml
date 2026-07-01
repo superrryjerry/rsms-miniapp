@@ -23,10 +23,10 @@
       <view class="info-row"><text class="info-label">合同里程</text><text class="info-value">{{item.trigger_value || '-'}} km</text></view>
       <view class="info-row"><text class="info-label">已跑里程</text><text class="info-value">{{item.threshold_value || '-'}} km</text></view>
     </block>
-    <!-- 合同次数：触发值=剩余次数，阈值=预警阈值 -->
+    <!-- 合同次数：触发值=总保养次数，阈值=剩余次数 -->
     <block wx:elif="{{item.lead_type === 'contract_count'}}">
-      <view class="info-row"><text class="info-label">剩余次数</text><text class="info-value">{{item.trigger_value || '-'}} 次</text></view>
-      <view class="info-row"><text class="info-label">预警阈值</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
+      <view class="info-row"><text class="info-label">总保养次数</text><text class="info-value">{{item.trigger_value || '-'}} 次</text></view>
+      <view class="info-row"><text class="info-label">剩余次数</text><text class="info-value">{{item.threshold_value || '-'}} 次</text></view>
     </block>
     <!-- 默认显示 -->
     <block wx:else>
