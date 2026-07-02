@@ -1,14 +1,14 @@
 <view class="container">
   <view class="logo-section">
     <image class="logo" src="/assets/logo.png" mode="aspectFit"></image>
-    <text class="app-name">个人拜访rsms跟进小助手</text>
+    <text class="app-name">小斯的商用车客户跟踪手账</text>
     <text class="version">版本 1.0.0</text>
   </view>
 
   <view class="content-card">
     <view class="section">
       <text class="title">产品介绍</text>
-      <text class="desc">个人拜访rsms跟进小助手是一款专为经销商销售人员打造的客户跟进管理工具。帮助您随时随地记录拜访情况，智能提醒跟进任务，让客户关系维护更加轻松高效。</text>
+      <text class="desc">小斯的商用车客户跟踪手账是一款专为经销商销售人员打造的客户跟进管理工具。帮助您随时随地记录拜访情况，智能提醒跟进任务，让客户关系维护更加轻松高效。</text>
     </view>
 
     <view class="section">
