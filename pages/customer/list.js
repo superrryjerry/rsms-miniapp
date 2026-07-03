@@ -43,11 +43,11 @@ Page({
         data: { customer_name: customerName, tag: tagValue }
       });
       if (res.code === 0) {
-        // 更新本地数据
-        const key = `list[${idx}].my_tag`;
-        this.setData({ [key]: tagValue || null });
-        wx.showToast({ title: '标签已更新', icon: 'success' });
-      }
+              // 更新本地数据
+              const key = `list[${idx}].tag`;
+              this.setData({ [key]: tagValue || null });
+              wx.showToast({ title: '标签已更新', icon: 'success' });
+            }
     } catch (err) {
       wx.showToast({ title: '更新失败', icon: 'error' });
     }

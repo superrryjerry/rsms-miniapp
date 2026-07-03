@@ -6,12 +6,12 @@
     <view class="item-left" bindtap="goDetail" data-name="{{item.customer_name}}">
       <view class="name-row">
         <text class="name-text">{{item.customer_name}}</text>
-        <text class="tag-badge tag-{{item.my_tag || 'none'}}" wx:if="{{item.my_tag}}">{{item.my_tag === 'core' ? '核心' : item.my_tag === 'focus' ? '焦点' : item.my_tag === 'oasis' ? '绿洲' : item.my_tag === 'desert' ? '沙漠' : ''}}</text>
+        <text class="tag-badge tag-{{item.tag || 'none'}}" wx:if="{{item.tag}}">{{item.tag === 'core' ? '核心' : item.tag === 'focus' ? '焦点' : item.tag === 'oasis' ? '绿洲' : item.tag === 'desert' ? '沙漠' : ''}}</text>
         <text class="tag-warning" wx:if="{{item.warning}}">⚠️</text>
       </view>
       <text class="sub-text">服务经销商: {{item.service_dealers_short}}</text>
     </view>
-    <picker mode="selector" range="{{tagOptions}}" range-key="label" value="{{item.my_tag ? tagIndexMap[item.my_tag] : 0}}" bindchange="onTagChange" data-index="{{index}}" data-name="{{item.customer_name}}">
+    <picker mode="selector" range="{{tagOptions}}" range-key="label" value="{{item.tag ? tagIndexMap[item.tag] : 0}}" bindchange="onTagChange" data-index="{{index}}" data-name="{{item.customer_name}}">
       <view class="tag-picker-btn">🏷️</view>
     </picker>
   </view>
