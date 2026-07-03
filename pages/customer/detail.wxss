@@ -10,4 +10,4 @@
 .activity-method { font-size: 24rpx; color: #666; margin-left: 12rpx; }
 .activity-content { display: block; font-size: 26rpx; color: #333; margin-bottom: 8rpx; }
 .activity-time { font-size: 22rpx; color: #999; }
-.fab { position: fixed; right: 30rpx; bottom: 60rpx; background: #1890ff; color: #fff; padding: 20rpx 32rpx; border-radius: 40rpx; font-size: 28rpx; box-shadow: 0 4rpx 16rpx rgba(24,144,255,0.4); }
+.fab { position: fixed; right: 30rpx; bottom: 30rpx; background: #1890ff; color: #fff; padding: 20rpx 32rpx; border-radius: 40rpx; font-size: 28rpx; box-shadow: 0 4rpx 16rpx rgba(24,144,255,0.4); }
