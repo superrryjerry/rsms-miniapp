@@ -22,6 +22,7 @@
   <view wx:if="{{activeTab === 'contract'}}">
     <view class="card" wx:for="{{contracts}}" wx:key="id">
       <view class="contract-status"><text class="tag tag-{{item.status === 'expired' ? 'expired' : item.status === 'warning' ? 'warning' : 'done'}}">{{item.status}}</text></view>
+      <view class="info-row"><text class="info-label">合同类型</text><text class="info-value">{{item.contract_type || '-'}}</text></view>
       <view class="info-row"><text class="info-label">结束日期</text><text class="info-value">{{item.contract_end_date || '-'}}</text></view>
       <view class="info-row"><text class="info-label">设置里程</text><text class="info-value">{{item.contract_set_mileage}} km</text></view>
       <view class="info-row"><text class="info-label">已用里程</text><text class="info-value">{{item.mileage_used}} km</text></view>
