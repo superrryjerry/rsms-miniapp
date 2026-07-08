@@ -6,7 +6,7 @@
   </view>
 
   <view class="list" wx:if="{{list.length > 0}}">
-    <view class="list-item card" wx:for="{{list}}" wx:key="vin">
+    <view class="list-item card" wx:for="{{list}}" wx:key="vin" bindtap="goVehicle" data-vin="{{item.vin}}">
       <view class="item-main">
         <text class="item-vin">{{item.vin}}</text>
         <text class="item-plate" wx:if="{{item.license_plate}}">{{item.license_plate}}</text>

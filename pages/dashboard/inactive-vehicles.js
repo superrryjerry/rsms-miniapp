@@ -20,5 +20,9 @@ Page({
       wx.showToast({ title: '加载失败', icon: 'none' });
     }
     wx.hideLoading();
+  },
+  goVehicle(e) {
+    const vin = e.currentTarget.dataset.vin;
+    wx.navigateTo({ url: '/pages/vehicle/detail?vin=' + vin });
   }
 });
