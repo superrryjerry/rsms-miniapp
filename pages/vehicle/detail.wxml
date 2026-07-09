@@ -7,17 +7,19 @@
   </view>
 
   <!-- 基础信息 -->
-    <view class="card" wx:if="{{activeTab === 'info'}}">
-      <view class="info-row"><text class="info-label">VIN</text><text class="info-value">{{vehicle.vin}}</text></view>
-      <view class="info-row"><text class="info-label">车牌</text><text class="info-value">{{vehicle.license_plate || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">客户</text><text class="info-value">{{vehicle.customer_name || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">车型</text><text class="info-value">{{vehicle.model || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">车辆类型</text><text class="info-value">{{vehicle.vehicle_type || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">车龄</text><text class="info-value">{{vehicle.vehicle_age || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{vehicle.sales_dealer || '-'}}</text></view>
-      <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{vehicle.service_dealer}}</text></view>
-      <view class="info-row"><text class="info-label">交付日期</text><text class="info-value">{{vehicle.delivery_date || '-'}}</text></view>
-    </view>
+      <view class="card" wx:if="{{activeTab === 'info'}}">
+        <view class="info-row"><text class="info-label">VIN</text><text class="info-value">{{vehicle.vin}}</text></view>
+        <view class="info-row"><text class="info-label">车牌</text><text class="info-value">{{vehicle.license_plate || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">客户</text><text class="info-value">{{vehicle.customer_name || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">车型</text><text class="info-value">{{vehicle.model || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">车辆类型</text><text class="info-value">{{vehicle.vehicle_type || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">车龄</text><text class="info-value">{{vehicle.vehicle_age || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">年总收入</text><text class="info-value">{{vehicle.annual_income ? vehicle.annual_income.toFixed(2) + ' 元' : '-'}}</text></view>
+        <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{vehicle.sales_dealer || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{vehicle.service_dealer}}</text></view>
+        <view class="info-row"><text class="info-label">交付日期</text><text class="info-value">{{vehicle.delivery_date || '-'}}</text></view>
+        <view class="info-row"><text class="info-label">生产日期</text><text class="info-value">{{vehicle.production_date || '-'}}</text></view>
+      </view>
 
   <!-- 合同列表 -->
   <view wx:if="{{activeTab === 'contract'}}">
