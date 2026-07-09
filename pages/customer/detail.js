@@ -1,11 +1,11 @@
 const app = getApp();
 Page({
-  data: { customer: null, vehicles: [], contracts: [], workOrders: [], activities: [], canAddActivity: false, activeTab: 'info' },
+  data: { customer: null, vehicles: [], contracts: [], workOrders: [], activities: [], canAddActivity: false, activeTab: 'info', totalAnnualIncome: 0 },
   onLoad(opts) { this.customerName = decodeURIComponent(opts.name); this.loadDetail(); },
   async loadDetail() {
     const res = await app.request({ url: '/customers/detail/' + encodeURIComponent(this.customerName) });
     if (res.code === 0) {
-      this.setData({ customer: res.data, vehicles: res.data.vehicles, contracts: res.data.contracts, workOrders: res.data.work_orders, activities: res.data.activities, canAddActivity: res.data.can_add_activity });
+      this.setData({ customer: res.data, vehicles: res.data.vehicles, contracts: res.data.contracts, workOrders: res.data.work_orders, activities: res.data.activities, canAddActivity: res.data.can_add_activity, totalAnnualIncome: res.data.total_annual_income || 0 });
     }
   },
   switchTab(e) { this.setData({ activeTab: e.currentTarget.dataset.tab }); },

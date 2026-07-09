@@ -2,7 +2,16 @@
   <view class="card">
     <view class="form-item">
       <text class="label">客户名称 *</text>
-      <input placeholder="请输入客户名称" value="{{customer_name}}" bindinput="onInput" data-field="customer_name" />
+      <input placeholder="请输入客户名称搜索" value="{{customer_name}}" bindinput="onCustomerInput" data-field="customer_name" />
+      <!-- 搜索建议下拉 -->
+      <view class="suggestions" wx:if="{{showSuggestions && suggestions.length > 0}}">
+        <view class="suggestion-item" wx:for="{{suggestions}}" wx:key="*this" bindtap="selectCustomer" data-name="{{item}}">
+          {{item}}
+        </view>
+      </view>
+      <view class="suggestions" wx:if="{{showSuggestions && suggestions.length === 0 && customer_name}}">
+        <view class="suggestion-empty">未找到匹配客户</view>
+      </view>
     </view>
     <view class="form-item">
       <text class="label">拜访目的</text>

@@ -4,14 +4,14 @@ Page({
     customer_name: '', visit_purpose: '', visit_method: 'phone', visit_location: '',
     location_lat: '', location_lng: '', visit_time: '', content: '', photos: [],
     methods: ['电话', '微信', '线下'], methodValues: ['phone', 'wechat', 'offline'], methodIndex: 0,
-    isEdit: false, activityId: null
+    isEdit: false, activityId: null,
+    showSuggestions: false, suggestions: [], searchTimer: null
   },
   onLoad(opts) {
     if (opts.customer) this.setData({ customer_name: decodeURIComponent(opts.customer) });
     if (opts.id) { this.setData({ isEdit: true, activityId: opts.id }); this.loadActivity(opts.id); }
   },
   async loadActivity(id) {
-    // 通过列表接口获取单条（简化处理）
     const res = await app.request({ url: '/activities/list', data: { page: 1, size: 100 } });
     if (res.code === 0) {
       const item = res.data.list.find(a => a.id == id);
@@ -25,6 +25,33 @@ Page({
         });
       }
     }
+  },
+  // 客户名输入搜索
+  onCustomerInput(e) {
+    const value = e.detail.value;
+    this.setData({ customer_name: value, showSuggestions: true });
+    // 防抖搜索
+    if (this.data.searchTimer) clearTimeout(this.data.searchTimer);
+    if (!value || value.trim().length === 0) {
+      this.setData({ suggestions: [], showSuggestions: false });
+      return;
+    }
+    this.setData({ searchTimer: setTimeout(() => this.searchCustomers(value), 300) });
+  },
+  async searchCustomers(keyword) {
+    const res = await app.request({ url: '/customers/search', data: { keyword } });
+    if (res.code === 0) {
+      this.setData({ suggestions: res.data });
+    } else {
+      this.setData({ suggestions: [] });
+    }
+  },
+  selectCustomer(e) {
+    const name = e.currentTarget.dataset.name;
+    this.setData({ customer_name: name, showSuggestions: false, suggestions: [] });
+  },
+  hideSuggestions() {
+    this.setData({ showSuggestions: false });
   },
   onInput(e) { this.setData({ [e.currentTarget.dataset.field]: e.detail.value }); },
   onMethodChange(e) { this.setData({ methodIndex: e.detail.value, visit_method: this.data.methodValues[e.detail.value] }); },
@@ -77,6 +104,7 @@ Page({
     wx.showLoading({ title: '保存中...' });
     const data = { ...this.data, status };
     delete data.methods; delete data.methodValues; delete data.methodIndex; delete data.isEdit; delete data.activityId;
+    delete data.showSuggestions; delete data.suggestions; delete data.searchTimer;
     const url = this.data.isEdit ? '/activities/update/' + this.data.activityId : '/activities/create';
     const res = await app.request({ url, method: 'POST', data });
     wx.hideLoading();
