@@ -9,7 +9,7 @@
     <view class="info-row"><text class="info-label">客户名称</text><text class="info-value">{{customer.customer_name}}</text></view>
     <view class="info-row"><text class="info-label">销售经销商</text><text class="info-value">{{customer.sales_dealers_summary || '-'}}</text></view>
     <view class="info-row"><text class="info-label">服务经销商</text><text class="info-value">{{customer.service_dealers_summary || '-'}}</text></view>
-    <view class="info-row"><text class="info-label">年总收入</text><text class="info-value">{{totalAnnualIncome ? totalAnnualIncome.toFixed(2) : '0'}} 元</text></view>
+    <view class="info-row"><text class="info-label">年总收入</text><text class="info-value">{{totalAnnualIncomeDisplay}}</text></view>
   </view>
 
   <view wx:if="{{activeTab === 'vehicles'}}">
