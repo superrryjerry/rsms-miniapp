@@ -4,11 +4,17 @@ Page({
   onLoad(opts) { this.vin = opts.vin; this.loadDetail(); },
   onShow() { this.loadDetail(); },
   async loadDetail() {
-    const res = await app.request({ url: '/vehicles/detail/' + this.vin });
-    if (res.code === 0) {
-      this.setData({ vehicle: res.data, contracts: res.data.contracts, workOrders: res.data.work_orders, permission: res.data.permission });
-    }
-  },
+      const res = await app.request({ url: '/vehicles/detail/' + this.vin });
+      if (res.code === 0) {
+        // 格式化年总收入，因为 WXML 不支持 .toFixed()
+        if (res.data.annual_income != null) {
+          res.data.annual_income_display = res.data.annual_income.toFixed(2) + ' 元';
+        } else {
+          res.data.annual_income_display = '-';
+        }
+        this.setData({ vehicle: res.data, contracts: res.data.contracts, workOrders: res.data.work_orders, permission: res.data.permission });
+      }
+    },
   switchTab(e) { this.setData({ activeTab: e.currentTarget.dataset.tab }); },
   // 丢公海池
   onDrop() {
