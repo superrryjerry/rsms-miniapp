@@ -2,11 +2,11 @@
 App({
   globalData: {
     // 环境配置：根据微信小程序环境自动切换
-    // 开发环境使用服务器IP，发布时需替换为线上地址
+    // 开发环境使用服务器IP，体验版和正式版必须用HTTPS域名
     envConfig: {
-      development: 'http://175.27.167.200/api',
-      trial: 'http://175.27.167.200/api',  // 体验版临时用IP
-      production: 'https://scaniacrm.top/api'
+      develop: 'http://175.27.167.200/api',   // 开发版(开发工具，可用HTTP)
+      trial: 'https://scaniacrm.top/api',      // 体验版(必须HTTPS)
+      release: 'https://scaniacrm.top/api'     // 正式版(必须HTTPS)
     },
     baseUrl: '',
     token: '',
@@ -16,7 +16,7 @@ App({
   onLaunch() {
     // 根据小程序运行环境选择 baseUrl
     const env = wx.getAccountInfoSync?.()?.miniProgram?.envVersion || 'develop';
-    this.globalData.baseUrl = this.globalData.envConfig[env] || this.globalData.envConfig.development;
+    this.globalData.baseUrl = this.globalData.envConfig[env] || this.globalData.envConfig.develop;
 
     const token = wx.getStorageSync('token');
     const userInfo = wx.getStorageSync('userInfo');
