@@ -7,6 +7,10 @@
     <text class="customer-name">{{item.customer_name}}</text>
     <text class="activity-preview">{{item.content || '无内容'}}</text>
     <text class="time">{{item.visit_time || item.created_at}}</text>
+    <view class="action-row">
+      <view class="action-btn edit" catchtap="goEdit" data-id="{{item.id}}">编辑</view>
+      <view class="action-btn delete" catchtap="onDelete" data-id="{{item.id}}" data-name="{{item.customer_name}}">删除</view>
+    </view>
   </view>
   <view class="empty" wx:if="{{!loading && list.length === 0}}">暂无销售活动</view>
   <view class="loading-tip" wx:if="{{loading}}">加载中...</view>

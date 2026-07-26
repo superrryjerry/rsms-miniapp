@@ -3,6 +3,10 @@
 .customer-name { display: block; font-size: 30rpx; font-weight: bold; margin-bottom: 8rpx; }
 .activity-preview { display: block; font-size: 26rpx; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .time { display: block; font-size: 22rpx; color: #999; margin-top: 8rpx; }
+.action-row { display: flex; gap: 16rpx; margin-top: 12rpx; }
+.action-btn { padding: 8rpx 32rpx; border-radius: 8rpx; font-size: 24rpx; }
+.action-btn.edit { background: #e6f7ff; color: #1890ff; border: 1rpx solid #91d5ff; }
+.action-btn.delete { background: #fff1f0; color: #ff4d4f; border: 1rpx solid #ffa39e; }
 /* 底部悬浮新增按钮 */
 .fab-btn {
   position: fixed;

@@ -17,4 +17,8 @@
       <image wx:for="{{activity.photos}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="photo" bindtap="previewPhoto" data-url="{{item}}" />
     </view>
   </view>
+  <view class="action-bar">
+    <button class="btn-edit" bindtap="goEdit">编辑</button>
+    <button class="btn-delete" bindtap="onDelete">删除</button>
+  </view>
 </view>
