@@ -1,7 +1,7 @@
 # RSMS CRM 系统部署经验手册
 
 > 基于首次部署经验整理，供新服务器迁移时参考。
-> 编写日期：2026-07-27
+> 编写日期：2026-07-27（含安全优化更新）
 
 ---
 
@@ -45,7 +45,37 @@
 - **磁盘**: 最低20GB（当前40GB，使用19%）
 - **网络**: 需开放 80 和 443 端口
 
-### 2.2 安装 Node.js v22
+### 2.2 安装 fail2ban（防SSH暴力破解）
+
+```bash
+sudo apt-get install -y fail2ban
+
+# 配置：SSH失败5次封禁10分钟
+sudo tee /etc/fail2ban/jail.local << 'EOF'
+[DEFAULT]
+bantime = 600
+findtime = 600
+maxretry = 5
+backend = systemd
+
+[sshd]
+enabled = true
+port = ssh
+maxretry = 5
+bantime = 600
+EOF
+
+sudo systemctl enable fail2ban
+sudo systemctl restart fail2ban
+
+# 验证
+sudo fail2ban-client status sshd
+```
+
+> fail2ban 开箱即用，盯着系统登录日志，发现某IP连续输错SSH密码5次就自动拉进防火墙黑名单封10分钟。
+> `bantime`（封禁时长）和 `maxretry`（最大失败次数）可按需调整。
+
+### 2.3 安装 Node.js v22
 
 ```bash
 # 安装 Node.js 22.x LTS
@@ -57,7 +87,7 @@ node -v   # v22.x
 npm -v    # v10.x
 ```
 
-### 2.3 安装 PM2（进程守护）
+### 2.4 安装 PM2（进程守护）
 
 ```bash
 sudo npm install -g pm2
@@ -67,13 +97,13 @@ pm2 startup systemd -u ubuntu --hp /home/ubuntu
 # 按提示执行返回的 sudo 命令
 ```
 
-### 2.4 安装 Nginx
+### 2.5 安装 Nginx
 
 ```bash
 sudo apt-get install -y nginx
 ```
 
-### 2.5 配置 Git 凭证
+### 2.6 配置 Git 凭证
 
 ```bash
 # 配置 GitHub 访问凭证（私有仓库）
@@ -139,15 +169,41 @@ node src/migrations/init.js
 > 首次启动会自动创建数据库表结构 + 默认管理员账号。
 > 控制台会输出管理员密码，**务必保存**！
 
-### 3.6 用 PM2 启动
+### 3.6 用 PM2 启动（ecosystem 模式）
+
+项目根目录已有 `ecosystem.config.js` 配置文件，包含内存限制、崩溃重启策略、日志配置等：
 
 ```bash
 cd ~/rsms-backend
-pm2 start src/app.js --name rsms-backend
+pm2 start ecosystem.config.js
 pm2 save
 ```
 
-### 3.7 验证后端
+> **ecosystem.config.js 关键配置项**：
+> - `max_memory_restart: '400M'` — 内存超400M自动重启（防内存泄漏，2G机器必选项）
+> - `restart_delay: 5000` — 崩溃后等5秒再拉起，避免疯狂重启
+> - `max_restarts: 10` — 1分钟内重启10次就停止（防止反复崩溃）
+> - `min_uptime: '10s'` — 启动10秒内崩溃算异常
+> - `log_date_format` — 日志加时间戳
+>
+> 以后启动只需 `pm2 start ecosystem.config.js`，不用手敲参数。
+
+### 3.7 配置 PM2 日志轮转
+
+防止日志把硬盘写满（日志超50MB切一刀，旧文件压缩，只保留最近7个）：
+
+```bash
+pm2 install pm2-logrotate
+
+pm2 set pm2-logrotate:max_size 50M      # 超过50MB切一刀
+pm2 set pm2-logrotate:retain 7          # 只保留最近7个
+pm2 set pm2-logrotate:compress true    # 旧文件压缩存档
+pm2 set pm2-logrotate:dateFormat YYYY-MM-DD_HH-mm-ss
+
+pm2 save
+```
+
+### 3.8 验证后端
 
 ```bash
 curl http://localhost:3000/api/health
@@ -208,8 +264,10 @@ sudo certbot --nginx -d 你的域名 -d www.你的域名
 ```bash
 sudo tee /etc/nginx/sites-available/rsms << 'NGINX'
 # ============ 安全限流配置 ============
-limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
-limit_req_zone $binary_remote_addr zone=login_limit:10m rate=5r/m;
+# API限流30r/s（兜底防护，防DDoS；正常用户不会触发）
+limit_req_zone $binary_remote_addr zone=api_limit:10m rate=30r/s;
+# 登录限流20r/m（兜底防护；防暴力破解主力是后端密码错误5次锁定30分钟）
+limit_req_zone $binary_remote_addr zone=login_limit:10m rate=20r/m;
 
 server {
     listen 80 default_server;
@@ -382,6 +440,9 @@ sudo tail -50 /var/log/nginx/access.log
 
 # Nginx错误日志
 sudo tail -50 /var/log/nginx/error.log
+
+# fail2ban封禁状态
+sudo fail2ban-client status sshd
 ```
 
 ### 8.3 重启服务
@@ -394,11 +455,15 @@ pm2 restart rsms-backend
 sudo systemctl reload nginx
 ```
 
-### 8.4 PM2 开机自启
+### 8.4 PM2 开机自启 + 日志轮转
 
 ```bash
 pm2 save                # 保存当前进程列表
 pm2 startup             # 设置开机自启（按提示执行返回的sudo命令）
+
+# 日志轮转已安装 pm2-logrotate，配置：
+# max_size 50M | retain 7 | compress true
+# 如需修改：pm2 set pm2-logrotate:参数名 值
 ```
 
 ---
@@ -455,7 +520,17 @@ Nginx配置里要改成实际域名。
 SQLite 使用 WAL 模式，会产生 `rsms.db-wal` 和 `rsms.db-shm` 文件。
 **备份数据库时需要同时复制这三个文件**，或者先停止后端再备份。
 
-### 9.7 微信小程序 envVersion
+### 9.7 后端密码错误锁定机制
+
+后端 `auth.js` 已内置登录失败锁定：
+- 同一账号连续输错密码 **5次** → 锁定 **30分钟**
+- 锁定期间返回 `429: 登录失败次数过多，请X分钟后再试`
+- 登录成功会自动清除失败记录
+- 每小时自动清理过期的锁定记录
+
+> 这是防暴力破解的主力措施。Nginx登录限流(20r/m)只是兜底，两者配合使用。
+
+### 9.8 微信小程序 envVersion
 
 ```js
 const env = wx.getAccountInfoSync().miniProgram.envVersion;
@@ -476,6 +551,7 @@ baseUrl 会自动切换，不需要手动改。
 │   ├── .git/
 │   ├── .gitignore
 │   ├── package.json
+│   ├── ecosystem.config.js     # PM2配置（内存限制+重启策略+日志）
 │   ├── node_modules/
 │   ├── src/
 │   │   ├── app.js              # 后端入口
@@ -526,25 +602,36 @@ baseUrl 会自动切换，不需要手动改。
 
 部署完成后逐项确认：
 
+### 基础环境
 - [ ] Node.js v22 已安装
 - [ ] PM2 已安装且配置开机自启
 - [ ] Nginx 已安装
+- [ ] fail2ban 已安装且运行中（`sudo fail2ban-client status sshd`）
+
+### 后端
 - [ ] rsms-backend 代码已克隆
 - [ ] `npm install` 成功（better-sqlite3 编译通过）
 - [ ] `.env` 已配置（JWT_SECRET、CORS_ORIGINS）
 - [ ] 数据库已初始化（或已迁移旧数据）
-- [ ] `pm2 start src/app.js --name rsms-backend` 已执行
+- [ ] `pm2 start ecosystem.config.js` 已执行
+- [ ] PM2 日志轮转已安装（`pm2 install pm2-logrotate`）
 - [ ] `curl localhost:3000/api/health` 返回正常
+
+### 前端
 - [ ] rsms-admin 代码已克隆
 - [ ] `npm install` 成功
 - [ ] `npm run build` 成功生成 dist/
+
+### Nginx + SSL
 - [ ] 域名 DNS 已指向新服务器 IP
 - [ ] SSL 证书已申请（certbot）
-- [ ] Nginx 配置已创建并启用
+- [ ] Nginx 配置已创建并启用（限流 30r/s + 20r/m）
 - [ ] `sudo nginx -t` 测试通过
 - [ ] `sudo systemctl reload nginx` 已执行
 - [ ] 浏览器访问 `https://域名` 能打开登录页
 - [ ] 浏览器登录系统功能正常
+
+### 小程序
 - [ ] 小程序 app.js 域名已更新
 - [ ] 微信公众平台服务器域名已配置
 - [ ] 小程序开发工具能正常访问API
@@ -562,6 +649,7 @@ baseUrl 会自动切换，不需要手动改。
 | Nginx配置 | 反向代理 |
 | Git安装+GitHub访问 | 代码拉取 |
 | Let's Encrypt/certbot | SSL证书 |
+| fail2ban安装 | SSH防暴力破解 |
 | 文件读写 | 数据库/上传目录 |
 | 防火墙配置 | 安全策略 |
 | crontab | 定时任务(如需) |
