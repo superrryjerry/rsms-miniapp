@@ -11,3 +11,4 @@
 .modal-btns { display: flex; gap: 20rpx; margin-top: 20rpx; }
 .modal-btns .btn { flex: 1; }
 .picker-display { background: #f5f5f5; padding: 20rpx; border-radius: 8rpx; font-size: 28rpx; color: #666; }
+.btn-warn { background: #faad14; color: #fff; }

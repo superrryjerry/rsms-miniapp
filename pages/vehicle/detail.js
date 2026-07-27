@@ -1,6 +1,6 @@
 const app = getApp();
 Page({
-  data: { vehicle: null, contracts: [], workOrders: [], permission: 'readonly', activeTab: 'info', showApplyModal: false, showTransferModal: false, dealers: [], applyReason: '', transferTarget: '', transferReason: '' },
+  data: { vehicle: null, contracts: [], workOrders: [], permission: 'readonly', activeTab: 'info', showApplyModal: false, showTransferModal: false, showChangeCustomerModal: false, dealers: [], applyReason: '', transferTarget: '', transferReason: '', newCustomerName: '', changeCustomerReason: '' },
   onLoad(opts) { this.vin = opts.vin; this.loadDetail(); },
   onShow() { this.loadDetail(); },
   async loadDetail() {
@@ -60,5 +60,16 @@ Page({
     const res = await app.request({ url: '/vehicles/transfer', method: 'POST', data: { vin: this.vin, target_dealer: this.data.transferTarget, reason: this.data.transferReason } });
     wx.showToast({ title: res.msg, icon: res.code === 0 ? 'success' : 'none' });
     this.hideTransfer();
+  },
+  // 更改客户名称
+  showChangeCustomer() { this.setData({ showChangeCustomerModal: true }); },
+  hideChangeCustomer() { this.setData({ showChangeCustomerModal: false, newCustomerName: '', changeCustomerReason: '' }); },
+  onNewCustomerInput(e) { this.setData({ newCustomerName: e.detail.value }); },
+  onChangeCustomerReason(e) { this.setData({ changeCustomerReason: e.detail.value }); },
+  async submitChangeCustomer() {
+    if (!this.data.newCustomerName.trim()) return wx.showToast({ title: '请输入新客户名称', icon: 'none' });
+    const res = await app.request({ url: '/vehicles/change-customer', method: 'POST', data: { vin: this.vin, new_customer_name: this.data.newCustomerName.trim(), reason: this.data.changeCustomerReason } });
+    wx.showToast({ title: res.msg, icon: res.code === 0 ? 'success' : 'none' });
+    if (res.code === 0) { this.hideChangeCustomer(); this.loadDetail(); }
   }
 });

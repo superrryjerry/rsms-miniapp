@@ -7,7 +7,9 @@ Page({
     if (res.code === 0) {
       const item = res.data.list.find(a => a.id == this.activityId);
       if (item) {
-        item.photos = JSON.parse(item.photos || '[]');
+        item.photos = JSON.parse(item.photos || '[]').map(url =>
+          url.startsWith('http') ? url : app.globalData.baseUrl + url
+        );
         this.setData({ activity: item });
       }
     }
