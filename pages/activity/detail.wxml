@@ -11,12 +11,6 @@
     <view class="info-row"><text class="info-label">内容</text><text class="info-value">{{activity.content || '-'}}</text></view>
     <view class="info-row"><text class="info-label">创建时间</text><text class="info-value">{{activity.created_at}}</text></view>
   </view>
-  <view class="card" wx:if="{{activity.photos.length > 0}}">
-    <text class="section-title">照片</text>
-    <view class="photo-grid">
-      <image wx:for="{{activity.photos}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="photo" bindtap="previewPhoto" data-url="{{item}}" />
-    </view>
-  </view>
   <view class="action-bar">
     <button class="btn-edit" bindtap="goEdit">编辑</button>
     <button class="btn-delete" bindtap="onDelete">删除</button>

@@ -2,7 +2,7 @@ const app = getApp();
 Page({
   data: {
     customer_name: '', visit_purpose: '', visit_method: 'phone', visit_location: '',
-    location_lat: '', location_lng: '', visit_time: '', content: '', photos: [],
+    location_lat: '', location_lng: '', visit_time: '', content: '',
     methods: ['电话', '微信', '线下'], methodValues: ['phone', 'wechat', 'offline'], methodIndex: 0,
     isEdit: false, activityId: null,
     showSuggestions: false, suggestions: [], searchTimer: null
@@ -17,17 +17,11 @@ Page({
       const item = res.data.list.find(a => a.id == id);
       if (item) {
         const mi = this.data.methodValues.indexOf(item.visit_method);
-        // 编辑模式加载时拼接照片完整URL含token（image组件不支持header）
-        const token = app.globalData.token || wx.getStorageSync('token') || '';
-        const photos = JSON.parse(item.photos || '[]').map(url =>
-          url.startsWith('http') ? url + (url.indexOf('?') > -1 ? '&' : '?') + 'token=' + token
-            : app.globalData.baseUrl + url + '?token=' + token
-        );
         this.setData({
           customer_name: item.customer_name, visit_purpose: item.visit_purpose || '',
           visit_method: item.visit_method, methodIndex: mi >= 0 ? mi : 0,
           visit_location: item.visit_location || '', visit_time: item.visit_time || '',
-          content: item.content || '', photos
+          content: item.content || ''
         });
       }
     }
@@ -82,37 +76,12 @@ Page({
       }
     });
   },
-  choosePhoto() {
-    const remaining = 9 - this.data.photos.length;
-    if (remaining <= 0) return wx.showToast({ title: '最多9张照片', icon: 'none' });
-    wx.chooseImage({
-      count: remaining, sizeType: ['compressed'], sourceType: ['album', 'camera'],
-      success: async (res) => {
-        wx.showLoading({ title: '上传中...' });
-        for (const path of res.tempFilePaths) {
-          const uploadRes = await app.uploadFile(path);
-          if (uploadRes.code === 0) this.setData({ photos: [...this.data.photos, uploadRes.data.url] });
-        }
-        wx.hideLoading();
-      }
-    });
-  },
-  removePhoto(e) {
-    const idx = e.currentTarget.dataset.index;
-    const photos = [...this.data.photos];
-    photos.splice(idx, 1);
-    this.setData({ photos });
-  },
   async saveDraft() { await this.submit('draft'); },
   async saveComplete() { await this.submit('completed'); },
   async submit(status) {
     if (!this.data.customer_name) return wx.showToast({ title: '请选择客户', icon: 'none' });
     wx.showLoading({ title: '保存中...' });
-    // 提交前去掉照片URL的baseUrl和token参数，只存相对路径
-    const photos = this.data.photos.map(url => {
-      return url.replace(app.globalData.baseUrl, '').replace(/\?token=.*/, '');
-    });
-    const data = { ...this.data, status, photos };
+    const data = { ...this.data, status };
     delete data.methods; delete data.methodValues; delete data.methodIndex; delete data.isEdit; delete data.activityId;
     delete data.showSuggestions; delete data.suggestions; delete data.searchTimer;
     const url = this.data.isEdit ? '/activities/update/' + this.data.activityId : '/activities/create';

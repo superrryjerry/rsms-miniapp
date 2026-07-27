@@ -40,16 +40,6 @@
       <text class="label">拜访内容</text>
       <textarea placeholder="请输入拜访内容" value="{{content}}" bindinput="onInput" data-field="content" class="textarea" />
     </view>
-    <view class="form-item">
-      <text class="label">照片（最多9张）</text>
-      <view class="photo-grid">
-        <view class="photo-item" wx:for="{{photos}}" wx:key="*this">
-          <image src="{{item}}" mode="aspectFill" class="photo-img" />
-          <view class="photo-del" catchtap="removePhoto" data-index="{{index}}">×</view>
-        </view>
-        <view class="photo-add" bindtap="choosePhoto" wx:if="{{photos.length < 9}}">+</view>
-      </view>
-    </view>
   </view>
 
   <view class="btn-group">
