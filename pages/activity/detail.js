@@ -7,8 +7,11 @@ Page({
     if (res.code === 0) {
       const item = res.data.list.find(a => a.id == this.activityId);
       if (item) {
+        // 拼接完整URL：baseUrl + 相对路径 + token参数（image组件不支持header）
+        const token = app.globalData.token || wx.getStorageSync('token') || '';
         item.photos = JSON.parse(item.photos || '[]').map(url =>
-          url.startsWith('http') ? url : app.globalData.baseUrl + url
+          url.startsWith('http') ? url + (url.indexOf('?') > -1 ? '&' : '?') + 'token=' + token
+            : app.globalData.baseUrl + url + '?token=' + token
         );
         this.setData({ activity: item });
       }

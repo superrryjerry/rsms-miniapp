@@ -17,9 +17,11 @@ Page({
       const item = res.data.list.find(a => a.id == id);
       if (item) {
         const mi = this.data.methodValues.indexOf(item.visit_method);
-        // 编辑模式加载时拼接照片完整URL用于显示
+        // 编辑模式加载时拼接照片完整URL含token（image组件不支持header）
+        const token = app.globalData.token || wx.getStorageSync('token') || '';
         const photos = JSON.parse(item.photos || '[]').map(url =>
-          url.startsWith('http') ? url : app.globalData.baseUrl + url
+          url.startsWith('http') ? url + (url.indexOf('?') > -1 ? '&' : '?') + 'token=' + token
+            : app.globalData.baseUrl + url + '?token=' + token
         );
         this.setData({
           customer_name: item.customer_name, visit_purpose: item.visit_purpose || '',
@@ -106,8 +108,10 @@ Page({
   async submit(status) {
     if (!this.data.customer_name) return wx.showToast({ title: '请选择客户', icon: 'none' });
     wx.showLoading({ title: '保存中...' });
-    // 提交前去掉照片URL的baseUrl前缀，只存相对路径
-    const photos = this.data.photos.map(url => url.replace(app.globalData.baseUrl, ''));
+    // 提交前去掉照片URL的baseUrl和token参数，只存相对路径
+    const photos = this.data.photos.map(url => {
+      return url.replace(app.globalData.baseUrl, '').replace(/\?token=.*/, '');
+    });
     const data = { ...this.data, status, photos };
     delete data.methods; delete data.methodValues; delete data.methodIndex; delete data.isEdit; delete data.activityId;
     delete data.showSuggestions; delete data.suggestions; delete data.searchTimer;
