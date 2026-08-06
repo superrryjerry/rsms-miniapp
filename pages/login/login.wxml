@@ -4,7 +4,7 @@
       <view class="logo-circle">
         <text class="logo-text">RS</text>
       </view>
-      <text class="title">小斯的商用车客户跟踪手账</text>
+      <text class="title">SCANIA车辆清洗小工具</text>
       <text class="subtitle">随时记录 · 定时提醒 · 轻松跟进</text>
     </view>
     
@@ -30,6 +30,6 @@
   </view>
   
   <view class="footer">
-    <text class="footer-text">© 2024 RSMS 版权所有</text>
+    <text class="footer-text">© 2024 SCANIA车辆清洗小工具</text>
   </view>
 </view>
