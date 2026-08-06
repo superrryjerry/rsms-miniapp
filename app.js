@@ -4,9 +4,9 @@ App({
     // 环境配置：根据微信小程序环境自动切换
     // 开发环境使用服务器IP，体验版和正式版必须用HTTPS域名
     envConfig: {
-      develop: 'http://175.27.167.200/api',   // 开发版(开发工具，可用HTTP)
-      trial: 'https://scaniacrm.top/api',      // 体验版(必须HTTPS)
-      release: 'https://scaniacrm.top/api'     // 正式版(必须HTTPS)
+      develop: 'http://47.116.124.189/api',   // 开发版(开发工具，可用HTTP)
+      trial: 'https://scaniavehicle.cheeringtech.cn/api',      // 体验版(必须HTTPS)
+      release: 'https://scaniavehicle.cheeringtech.cn/api'     // 正式版(必须HTTPS)
     },
     baseUrl: '',
     token: '',
