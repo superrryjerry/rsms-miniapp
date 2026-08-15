@@ -37,17 +37,30 @@ Page({
     const tagValue = this.data.tagOptions[tagIdx].value;
     
     try {
-      const res = await app.request({
-        url: '/customers/tag',
-        method: 'PUT',
-        data: { customer_name: customerName, tag: tagValue }
-      });
-      if (res.code === 0) {
-              // 更新本地数据
-              const key = `list[${idx}].tag`;
-              this.setData({ [key]: tagValue || null });
-              wx.showToast({ title: '标签已更新', icon: 'success' });
-            }
+      if (tagValue) {
+        // 设置标签
+        const res = await app.request({
+          url: '/customers/tag',
+          method: 'PUT',
+          data: { customer_name: customerName, tag: tagValue }
+        });
+        if (res.code === 0) {
+          const key = `list[${idx}].tag`;
+          this.setData({ [key]: tagValue });
+          wx.showToast({ title: '标签已更新', icon: 'success' });
+        }
+      } else {
+        // 取消标签（无标签）
+        const res = await app.request({
+          url: '/customers/tag?customer_name=' + encodeURIComponent(customerName),
+          method: 'DELETE'
+        });
+        if (res.code === 0) {
+          const key = `list[${idx}].tag`;
+          this.setData({ [key]: null });
+          wx.showToast({ title: '标签已取消', icon: 'success' });
+        }
+      }
     } catch (err) {
       wx.showToast({ title: '更新失败', icon: 'error' });
     }
