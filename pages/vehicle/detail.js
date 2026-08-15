@@ -7,8 +7,9 @@ Page({
       const res = await app.request({ url: '/vehicles/detail/' + this.vin });
       if (res.code === 0) {
         // 格式化年总收入，因为 WXML 不支持 .toFixed()
+        // PG的numeric类型返回字符串，需要先parseFloat
         if (res.data.annual_income != null) {
-          res.data.annual_income_display = res.data.annual_income.toFixed(2) + ' 元';
+          res.data.annual_income_display = parseFloat(res.data.annual_income).toFixed(2) + ' 元';
         } else {
           res.data.annual_income_display = '-';
         }
