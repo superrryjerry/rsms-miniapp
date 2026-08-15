@@ -24,7 +24,7 @@
       <view class="info-row"><text class="info-label">合同类型</text><text class="info-value">{{item.trigger_value || '-'}}</text></view>
       <view class="info-row"><text class="info-label">合同结束</text><text class="info-value">{{item.threshold_value || '-'}}</text></view>
     </block>
-    <!-- 合同里程：触发值=合同设置里程，阈值=实际跑完里程 -->
+    <!-- 合同里程：触发值=合同设置里程，阈值=已跑里程 -->
     <block wx:elif="{{item.lead_type === 'contract_mileage'}}">
       <view class="info-row"><text class="info-label">合同里程</text><text class="info-value">{{item.trigger_value || '-'}} km</text></view>
       <view class="info-row"><text class="info-label">已跑里程</text><text class="info-value">{{item.threshold_value || '-'}} km</text></view>
